@@ -1,76 +1,99 @@
+"use client";
+
 export default function TimelineDiklat() {
   const steps = [
     {
       no: "01",
       judul: "Pendaftaran TONGSIS",
-      tanggal: "01 - 07 September 2026",
-      deskripsi: "Peserta yang lolos open recruitment mengisi formulir pendaftaran TONGSIS.",
+      tanggal: "Akan Diumumkan",
+      deskripsi: "Kamu yang udah lolos open recruitment tinggal isi formulir pendaftaran TONGSIS. Simpel.",
       status: "aktif",
+      warna: "orange",
     },
     {
       no: "02",
       judul: "Pra Diklat",
-      tanggal: "08 - 10 September 2026",
-      deskripsi: "Serangkaian kegiatan persiapan sebelum pelaksanaan Diklat utama dimulai.",
+      tanggal: "Akan Diumumkan",
+      deskripsi: "Serangkaian kegiatan persiapan sebelum diklat utama dimulai. Semacam pemanasan — biar kamu nggak kaget.",
       status: "akan-datang",
+      warna: "brown",
     },
     {
       no: "03",
       judul: "Diklat TONGSIS",
-      tanggal: "12 - 14 September 2026",
-      deskripsi: "Pelaksanaan Diklat intensif selama 3 hari — pembekalan skill, outbound, dan pelantikan.",
+      tanggal: "Akan Diumumkan",
+      deskripsi: "Ini yang ditunggu-tunggu. Tiga hari intensif: pembekalan skill, outbound, dan pelantikan resmi sebagai anggota.",
       status: "akan-datang",
+      warna: "brown",
     },
   ];
 
   return (
-    <section className="py-24 px-4 bg-[#F8F9FC]">
+    <section className="py-24 px-4 bg-[#F2F2F2]">
       <div className="mx-auto max-w-3xl">
+        {/* Section Header */}
         <div className="text-center mb-16">
-          <span className="text-xs font-bold tracking-[0.2em] text-violet-600 uppercase">
+          <span className="text-xs font-bold tracking-[0.2em] text-[#F27405] uppercase">
             Tahapan
           </span>
-          <h2 className="mt-4 text-4xl font-extrabold text-[#0B1026] tracking-tight">
-            Timeline TONGSIS
+          <h2 className="mt-4 text-4xl md:text-5xl font-extrabold text-[#0D0D0D] tracking-tight">
+            Tiga Tahap Sebelum Kamu Resmi Jadi Anggota
           </h2>
-          <p className="mt-6 text-gray-500 max-w-xl mx-auto leading-relaxed">
-            Tiga tahapan yang harus kamu lewati sebelum resmi jadi anggota UKM-F Riset.
+          <p className="mt-6 text-gray-600 max-w-xl mx-auto leading-relaxed font-medium">
+            Santai, nggak ribet. Ini prosesnya:
           </p>
         </div>
 
+        {/* List Vertikal */}
         <div className="space-y-6">
           {steps.map((step) => (
             <div 
               key={step.no} 
-              className={`relative bg-white p-8 rounded-[2rem] border transition-all duration-300 ${
-                step.status === "aktif" 
-                  ? "border-violet-200 shadow-xl shadow-violet-500/10" 
-                  : "border-gray-100 shadow-[0_10px_40px_-10px_rgba(0,0,0,0.05)]"
-              }`}
+              className={`group relative overflow-hidden bg-white p-8 rounded-[2rem] border transition-all duration-300
+                ${step.status === "aktif" 
+                  ? "border-[#F27405]/40 shadow-xl shadow-[#F27405]/5" 
+                  : "border-gray-100 shadow-[0_10px_40px_-10px_rgba(0,0,0,0.03)] hover:border-gray-200"
+                }`}
             >
-              <div className="flex items-start justify-between gap-4">
-                <div className="flex gap-4">
-                  <div className={`w-12 h-12 rounded-2xl flex items-center justify-center shrink-0 font-black text-lg ${
-                    step.status === "aktif" ? "bg-violet-600 text-white" : "bg-gray-100 text-gray-400"
-                  }`}>
+              {/* Overlay halus untuk kartu aktif saat di-hover */}
+              <div className={`absolute inset-0 opacity-0 group-hover:opacity-[0.015] transition-opacity duration-300 ${step.warna === "orange" ? "bg-[#F27405]" : "bg-[#A6691F]"}`}></div>
+
+              <div className="relative z-10 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                <div className="flex gap-4 items-start">
+                  {/* Nomor Urut (Kotak Minimalis) */}
+                  <div className={`w-12 h-12 rounded-2xl flex items-center justify-center shrink-0 font-black text-lg transition-all duration-300 border-2
+                    ${step.status === "aktif" 
+                      ? "bg-[#F27405] border-[#F27405] text-white shadow-md shadow-[#F27405]/10" 
+                      : "bg-transparent border-gray-200 text-gray-400 group-hover:border-gray-300"
+                    }`}
+                  >
                     {step.no}
                   </div>
                   <div>
-                    <h3 className="font-extrabold text-[#0B1026] text-lg">{step.judul}</h3>
-                    <p className="text-gray-500 text-sm mt-1 leading-relaxed">{step.deskripsi}</p>
+                    <h3 className="font-extrabold text-[#0D0D0D] text-lg">{step.judul}</h3>
+                    <p className="text-gray-500 text-sm mt-1 leading-relaxed font-medium">{step.deskripsi}</p>
                   </div>
                 </div>
-                <span className="text-xs font-bold text-violet-600 bg-violet-50 px-3 py-1 rounded-full whitespace-nowrap">
-                  {step.tanggal}
-                </span>
+
+                {/* Badge Tanggal Minimalis (Outline-Only) */}
+                <div className="sm:text-right self-start sm:self-center">
+                  <span className={`text-[11px] font-extrabold border bg-transparent px-3 py-1.5 rounded-full uppercase tracking-wider transition-all duration-300 whitespace-nowrap
+                    ${step.warna === "orange" 
+                      ? "border-[#F27405]/30 text-[#F27405]" 
+                      : "border-[#A6691F]/20 text-[#A6691F] group-hover:border-[#A6691F]/40"
+                    }`}
+                  >
+                    {step.tanggal}
+                  </span>
+                </div>
               </div>
               
-              {/* Status Indicator */}
+              {/* Status Indicator Sinyal Berkedip untuk Tahap Aktif */}
               {step.status === "aktif" && (
-                <div className="absolute top-8 right-8">
-                  <span className="relative flex h-3 w-3">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-violet-400 opacity-75"></span>
-                    <span className="relative inline-flex rounded-full h-3 w-3 bg-violet-500"></span>
+                <div className="absolute top-4 right-4 sm:top-6 sm:right-6">
+                  <span className="relative flex h-2.5 w-2.5">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#F27405] opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#F27405]"></span>
                   </span>
                 </div>
               )}

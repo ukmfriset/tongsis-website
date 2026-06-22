@@ -2,49 +2,57 @@
 
 export default function HeroHome() {
   return (
-    <section className="relative min-h-[90vh] flex flex-col items-center justify-center px-4 text-center overflow-hidden bg-[#F8F9FC]">
+    /* PERBAIKAN MUTLAK: pt-40 dinaikkan menjadi pt-48 (192px) untuk memastikan 
+       elemen teratas beneran punya benteng jarak yang tebal dari bawah navbar */
+    <section className="relative min-h-screen flex flex-col items-center justify-start pt-48 pb-24 px-4 text-center overflow-hidden bg-[#F2F2F2] -mt-20">
       
-      {/* Elemen Dekoratif Playful */}
-      <div className="pointer-events-none absolute -top-32 -left-32 w-96 h-96 rounded-full bg-violet-200/40 blur-3xl mix-blend-multiply"></div>
-      <div className="pointer-events-none absolute -bottom-32 -right-32 w-96 h-96 rounded-full bg-cyan-200/30 blur-3xl mix-blend-multiply"></div>
-      <div className="pointer-events-none absolute top-1/3 left-1/2 -translate-x-1/2 w-80 h-80 rounded-full bg-pink-100/30 blur-3xl mix-blend-multiply"></div>
+      {/* ─── AMBIENT BLOB EFFECT LAYER ─── */}
+      <div className="pointer-events-none absolute -top-20 -left-20 w-[550px] h-[550px] rounded-full bg-[#F27405]/12 blur-[100px]" />
+      <div className="pointer-events-none absolute -bottom-40 -right-40 w-[500px] h-[500px] rounded-full bg-[#A6691F]/8 blur-[100px]" />
 
-      <div className="relative z-10 flex flex-col items-center">
+      {/* ─── HERO CONTENT LAYER ─── */}
+      {/* Menggunakan gap vertikal yang konsisten (space-y) agar antar elemen saling menjaga jarak */}
+      <div className="relative z-10 flex flex-col items-center max-w-4xl mx-auto space-y-6">
 
-        {/* Badge */}
-        <div className="mb-8 inline-flex items-center gap-2 rounded-full border border-gray-200 bg-white/80 backdrop-blur-md px-4 py-1.5 shadow-sm">
-          <span className="h-2 w-2 rounded-full bg-gradient-to-r from-violet-500 to-cyan-500"></span>
-          <span className="text-xs font-medium text-gray-500">
-            UKMF RISET FISIB UTM
+        {/* 1. Badge Teratas — Sekarang dijamin turun dan punya ruang napas */}
+        <div className="inline-flex items-center gap-2 rounded-full border border-gray-200 bg-white/80 backdrop-blur-md px-4 py-1.5 shadow-sm">
+          <span className="h-2 w-2 rounded-full bg-gradient-to-r from-[#F27405] to-[#A6691F]"></span>
+          <span className="text-xs font-bold text-gray-500 uppercase tracking-wider">
+            UKM-F RISET FISIB UTM
           </span>
         </div>
 
-        {/* Title */}
-        <h1 className="font-heading text-6xl md:text-8xl font-bold leading-none tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-violet-600 via-fuchsia-500 to-cyan-500 transition-all duration-500 ease-out hover:scale-105 cursor-pointer inline-block">
-          TONGSIS 2026
-        </h1>
+        {/* 2. Heading Hitam Sambutan */}
+        <h2 className="text-2xl md:text-3xl font-extrabold text-[#0D0D0D] tracking-tight pt-2 animate-fade-in">
+          Selamat Datang, Calon Anggota Baru
+        </h2>
 
-        {/* Subtitle */}
-        <p className="mt-4 text-xs md:text-base text-gray-400 max-w-full font-medium whitespace-nowrap font-sans">
-          Training of Good Skill of People to Imagination and Smarter
-        </p>
+        {/* 3. Title Utama Gradasi */}
+        <div className="pt-2">
+          <h1 className="font-heading text-6xl md:text-8xl font-extrabold leading-none tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-[#F27405] via-[#e06600] to-[#A6691F] transition-all duration-500 ease-out hover:scale-105 cursor-pointer inline-block">
+            TONGSIS 2026
+          </h1>
+          
+          {/* Subtitle Arti Akronim */}
+          <p className="mt-4 text-xs md:text-sm text-gray-400 max-w-full font-bold uppercase tracking-wide whitespace-nowrap font-sans">
+            Training of Good Skill of People to Imagination and Smarter
+          </p>
+        </div>
 
         {/* Description */}
-        <p className="mt-8 text-gray-500 max-w-lg text-base md:text-lg leading-relaxed font-sans">
-          Siap Menjadi Bagian dari{" "}
-          <span className="font-semibold text-violet-600">UKMF RISET FISIB UTM</span>?
-          Mulai langkah pertamamu di TONGSIS 2026 dan temukan pengalaman belajar, riset, serta pengembangan diri yang inspiratif.
+        <p className="pt-2 text-[#0D0D0D] max-w-2xl text-base md:text-lg leading-relaxed font-sans font-medium">
+          Riset itu bukan cuma tugas kuliah yang dikumpulin terus dilupain. Di <span className="font-extrabold text-[#F27405]">UKM-F RISET FISIB UTM</span>? 
+          riset adalah cara kita ngerti dunia — dan ngerti diri sendiri. TONGSIS 2026 adalah pintu masukmu ke komunitas ini.
+          Pengalaman belajar, eksplorasi, dan pengembangan diri yang nggak bakal kamu temuin di tempat lain. Tinggal pilih langkah pertamamu di bawah.
         </p>
 
-        {/* Divider */}
-        <div className="mt-10 flex items-center gap-3 text-gray-400">
-          <div className="h-px w-8 bg-gradient-to-r from-transparent to-violet-300"></div>
-          <span className="text-xs font-medium font-sans">Pilih jalurmu di bawah</span>
-          <div className="h-px w-8 bg-gradient-to-l from-transparent to-cyan-300"></div>
+        {/* Scroll/Divider Indicator */}
+        <div className="pt-6 flex flex-col items-center gap-3 text-gray-400">
+          <span className="text-[10px] font-bold font-sans text-gray-500 uppercase tracking-widest">🔍 Kamu ada di tahap mana sekarang?</span>
+          <div className="h-10 w-px bg-gradient-to-b from-gray-300 to-transparent"></div>
         </div>
 
       </div>
-
     </section>
   );
 }

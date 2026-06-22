@@ -5,66 +5,59 @@ export default function BenefitDiklat() {
     { 
       no: "01", 
       icon: "📚", 
-      warna: "violet", 
+      warna: "orange", 
       judul: "Materi Kepenulisan & Riset", 
-      deskripsi: "Pelajari dasar-dasar riset, kepenulisan ilmiah, penalaran, dan metodologi penelitian lewat sesi pembekalan yang terstruktur." 
+      deskripsi: "Dasar-dasar riset, kepenulisan ilmiah, penalaran, dan metodologi — disampein dengan cara yang masuk akal, bukan ceramah satu arah." 
     },
     { 
       no: "02", 
       icon: "🎤", 
-      warna: "cyan", 
+      warna: "brown", 
       judul: "Public Speaking", 
-      deskripsi: "Asah kemampuan komunikasi dan presentasi yang bermanfaat untuk kegiatan akademik maupun organisasi." 
+      deskripsi: "Latihan komunikasi dan presentasi yang berguna nggak cuma di organisasi, tapi juga buat kehidupan akademik dan karir ke depannya." 
     },
     { 
       no: "03", 
       icon: "🏕️", 
-      warna: "violet", 
+      warna: "orange", 
       judul: "Outbound & Team Building", 
-      deskripsi: "Berbagai aktivitas kelompok yang dirancang untuk membangun kerja sama, kekompakan, dan kebersamaan antar peserta." 
+      deskripsi: "Aktivitas kelompok yang bikin kamu sadar: hal-hal besar emang nggak bisa diselesaikan sendirian." 
     },
     { 
       no: "04", 
       icon: "🤝", 
-      warna: "cyan", 
-      judul: "Solidaritas dan Relasi Baru", 
-      deskripsi: "Kenal lebih dekat dengan sesama calon anggota, pengurus, dan budaya organisasi lewat berbagai kegiatan kebersamaan." 
+      warna: "brown", 
+      judul: "Relasi Baru yang Solid", 
+      deskripsi: "Kamu bakal kenal orang-orang yang frekuensinya sama. Dan dari sini, circle itu mulai terbentuk." 
     },
     { 
       no: "05", 
       icon: "🌱", 
-      warna: "violet", 
-      judul: "Pembentukan Karakter #ADIK", 
-      deskripsi: "Menumbuhkan nilai-nilai Adaptif, Dedikatif, Inklusif, dan Kreatif sebagai landasan dalam berorganisasi." 
+      warna: "orange", 
+      judul: "Karakter #ADIK", 
+      deskripsi: "Adaptif, Dedikatif, Inklusif, Kreatif — bukan dihafal, tapi dihidupin selama tiga hari bareng." 
     },
     { 
       no: "06", 
-      icon: "📜", 
-      warna: "cyan", 
+      icon: "📜", // PERBAIKAN: Mengembalikan properti icon ke emoji semula
+      warna: "brown", // PERBAIKAN: Mengembalikan properti warna yang sempat hilang
       judul: "Sertifikat Resmi", 
-      deskripsi: "Sertifikat resmi sebagai bukti partisipasi dalam rangkaian kegiatan TONGSIS." 
-    },
-    { 
-      no: "07", 
-      icon: "👕", 
-      warna: "violet", 
-      judul: "Fasilitas Peserta", 
-      deskripsi: "Fasilitas yang disediakan panitia untuk mendukung kenyamanan dan kelancaran kegiatanmu." 
+      deskripsi: "Bukti keikutsertaanmu. Nilai tambah yang nggak ada ruginya buat portofolio." 
     },
   ];
 
   return (
-    <section className="py-24 px-4 bg-[#F8F9FC]">
+    <section className="py-24 px-4 bg-[#F2F2F2]">
       <div className="mx-auto max-w-5xl">
         {/* Section Header */}
         <div className="text-center mb-16">
-          <span className="text-xs font-bold tracking-[0.2em] text-violet-600 uppercase">
+          <span className="text-xs font-bold tracking-[0.2em] text-[#F27405] uppercase">
             Yang Kamu Dapat
           </span>
-          <h2 className="mt-4 text-4xl md:text-5xl font-extrabold text-[#0B1026] tracking-tight">
-            Benefit dan Fasilitas
+          <h2 className="mt-4 text-4xl md:text-5xl font-extrabold text-[#0D0D0D] tracking-tight">
+            Ini yang Kamu Bawa Pulang dari TONGSIS
           </h2>
-          <p className="mt-6 text-gray-600 max-w-2xl mx-auto text-lg leading-relaxed">
+          <p className="mt-6 text-gray-600 max-w-2xl mx-auto text-lg leading-relaxed font-medium">
             Berbagai materi, pengalaman, dan fasilitas yang mendukung proses pembelajaranmu selama mengikuti TONGSIS.
           </p>
         </div>
@@ -75,28 +68,34 @@ export default function BenefitDiklat() {
             <div
               key={item.no}
               className={`group relative overflow-hidden bg-white rounded-[2rem] p-8 border transition-all duration-300 hover:-translate-y-2 
-              ${item.warna === "violet" 
-                ? "border-gray-100 hover:border-violet-300 hover:shadow-[0_20px_50px_-15px_rgba(139,92,246,0.15)]" 
-                : "border-gray-100 hover:border-cyan-300 hover:shadow-[0_20px_50px_-15px_rgba(6,182,212,0.15)]"}`}
+              ${item.warna === "orange" 
+                ? "border-gray-100 hover:border-[#F27405]/30 hover:shadow-[0_20px_50px_-15px_rgba(242,116,5,0.12)]" 
+                : "border-gray-100 hover:border-[#A6691F]/30 hover:shadow-[0_20px_50px_-15px_rgba(166,105,31,0.12)]"}`}
             >
               {/* Overlay Warna saat Hover */}
-              <div className={`absolute inset-0 opacity-0 group-hover:opacity-[0.03] transition-opacity duration-300 ${item.warna === "violet" ? "bg-violet-600" : "bg-cyan-600"}`}></div>
+              <div className={`absolute inset-0 opacity-0 group-hover:opacity-[0.015] transition-opacity duration-300 ${item.warna === "orange" ? "bg-[#F27405]" : "bg-[#A6691F]"}`}></div>
 
-              <div className="relative z-10 flex items-center gap-4 mb-6">
-                <div className={`w-14 h-14 rounded-2xl flex items-center justify-center text-2xl shadow-lg ${
-                  item.warna === "violet" ? "bg-violet-500 shadow-violet-200 text-white" : "bg-cyan-500 shadow-cyan-200 text-white"
-                }`}>
+              <div className="relative z-10 flex items-center justify-between mb-6">
+                {/* Icon Wadah Minimalis Outline-Only */}
+                <div className={`w-14 h-14 rounded-2xl flex items-center justify-center text-2xl border-2 bg-transparent transition-all duration-300 
+                  ${item.warna === "orange" 
+                    ? "border-[#F27405]/20 group-hover:border-[#F27405] group-hover:shadow-md group-hover:shadow-[#F27405]/10" 
+                    : "border-[#A6691F]/20 group-hover:border-[#A6691F] group-hover:shadow-md group-hover:shadow-[#A6691F]/10"
+                  }`}
+                >
                   {item.icon}
                 </div>
-                <span className={`text-4xl font-black opacity-10 ${
-                  item.warna === "violet" ? "text-violet-600" : "text-cyan-600"
+                
+                {/* Big Number Indicator */}
+                <span className={`text-4xl font-black opacity-10 select-none transition-colors duration-300 ${
+                  item.warna === "orange" ? "text-[#F27405]" : "text-[#A6691F]"
                 }`}>
                   {item.no}
                 </span>
               </div>
               
-              <h3 className="relative z-10 font-extrabold text-[#0B1026] text-lg mb-3">{item.judul}</h3>
-              <p className="relative z-10 text-gray-500 leading-relaxed text-sm">{item.deskripsi}</p>
+              <h3 className="relative z-10 font-extrabold text-[#0D0D0D] text-lg mb-3">{item.judul}</h3>
+              <p className="relative z-10 text-gray-500 leading-relaxed text-sm font-medium min-h-[4.5rem]">{item.deskripsi}</p>
             </div>
           ))}
         </div>

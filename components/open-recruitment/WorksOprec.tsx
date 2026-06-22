@@ -4,26 +4,25 @@ import Link from "next/link";
 
 export default function WorksOprec() {
   const categories = [
-    { icon: "📰", warna: "violet", judul: "Artikel", deskripsi: "Tulisan artikel ilmiah populer karya anggota seputar isu sosial dan akademik.", href: "https://www.ukmfriset.or.id/category/artikel" },
-    { icon: "📖", warna: "cyan", judul: "Cerpen", deskripsi: "Karya cerita pendek hasil kreativitas anggota UKM-F Riset di bidang sastra.", href: "https://www.ukmfriset.or.id/category/cerpen" },
-    { icon: "📝", warna: "violet", judul: "Essay", deskripsi: "Kumpulan esai ilmiah anggota yang membahas gagasan dan pandangan kritis.", href: "https://www.ukmfriset.or.id/category/essay" },
-    { icon: "✒️", warna: "cyan", judul: "Puisi", deskripsi: "Karya puisi yang ditulis anggota sebagai bentuk ekspresi dan kreativitas.", href: "https://www.ukmfriset.or.id/category/puisi" },
+    { icon: "📰", warna: "orange", judul: "Artikel", deskripsi: "Tulisan ilmiah populer seputar isu sosial dan akademik — dari anggota, untuk publik.", href: "https://www.ukmfriset.or.id/category/artikel" },
+    { icon: "📖", warna: "brown", judul: "Cerpen", deskripsi: "Cerita pendek dari sudut pandang mahasiswa yang mikir lebih dalam dari rata-rata.", href: "https://www.ukmfriset.or.id/category/cerpen" },
+    { icon: "📝", warna: "orange", judul: "Essay", deskripsi: "Esai kritis yang nggak takut punya opini. Berani, berargumen, berdampak.", href: "https://www.ukmfriset.or.id/category/essay" },
+    { icon: "✒️", warna: "brown", judul: "Puisi", deskripsi: "Ekspresi yang nggak bisa masuk jurnal tapi tetap penting untuk exist.", href: "https://www.ukmfriset.or.id/category/puisi" },
   ];
 
   return (
-    <section className="py-24 px-4 bg-[#F8F9FC]">
+    <section className="py-24 px-4 bg-[#F2F2F2]">
       <div className="mx-auto max-w-5xl">
         {/* Section Header */}
         <div className="text-center mb-16">
-          <span className="text-xs font-bold tracking-[0.2em] text-violet-600 uppercase">
+          <span className="text-xs font-bold tracking-[0.2em] text-[#F27405] uppercase">
             Hasil Karya
           </span>
-          <h2 className="mt-4 text-4xl md:text-5xl font-extrabold text-[#0B1026] tracking-tight">
-            Karya-karya Riset
+          <h2 className="mt-4 text-4xl md:text-5xl font-extrabold text-[#0D0D0D] tracking-tight">
+            Yang Kita Hasilin?<br/> Bukan Sekadar Tugas Kuliah
           </h2>
-          <p className="mt-6 text-gray-600 max-w-2xl mx-auto text-lg leading-relaxed">
-            Anggota UKM-F Riset aktif menghasilkan karya nyata — bukan cuma belajar teori.
-            Jelajahi karya-karya mereka di website resmi UKM-F Riset.
+          <p className="mt-6 text-gray-600 max-w-2xl mx-auto text-lg leading-relaxed font-medium">
+            Anggota UKM-F Riset aktif produksi karya nyata — artikel ilmiah, esai, cerpen, sampai puisi. Semua bisa kamu baca di website resmi kami.
           </p>
         </div>
 
@@ -36,23 +35,29 @@ export default function WorksOprec() {
               target="_blank"
               rel="noopener noreferrer"
               className={`group relative overflow-hidden bg-white rounded-[2rem] p-8 border transition-all duration-300 hover:-translate-y-2 
-              ${item.warna === "violet" 
-                ? "border-gray-100 hover:border-violet-300 hover:shadow-[0_20px_50px_-15px_rgba(139,92,246,0.15)]" 
-                : "border-gray-100 hover:border-cyan-300 hover:shadow-[0_20px_50px_-15px_rgba(6,182,212,0.15)]"}`}
+              ${item.warna === "orange" 
+                ? "border-gray-100 hover:border-[#F27405]/30 hover:shadow-[0_20px_50px_-15px_rgba(242,116,5,0.12)]" 
+                : "border-gray-100 hover:border-[#A6691F]/30 hover:shadow-[0_20px_50px_-15px_rgba(166,105,31,0.12)]"}`}
             >
-              {/* Overlay Warna saat Hover */}
-              <div className={`absolute inset-0 opacity-0 group-hover:opacity-[0.03] transition-opacity duration-300 ${item.warna === "violet" ? "bg-violet-600" : "bg-cyan-600"}`}></div>
+              {/* Overlay Transparan saat Hover */}
+              <div className={`absolute inset-0 opacity-0 group-hover:opacity-[0.015] transition-opacity duration-300 ${item.warna === "orange" ? "bg-[#F27405]" : "bg-[#A6691F]"}`}></div>
 
-              <div className={`relative z-10 w-14 h-14 rounded-2xl flex items-center justify-center text-2xl mb-6 shadow-lg transition-transform duration-300 group-hover:scale-105 ${
-                item.warna === "violet" ? "bg-violet-500 shadow-violet-200 text-white" : "bg-cyan-500 shadow-cyan-200 text-white"
-              }`}>
+              {/* Wadah Icon Minimalis (Outline-Only) */}
+              <div className={`w-14 h-14 rounded-2xl flex items-center justify-center text-2xl border-2 bg-transparent transition-all duration-300 mb-6
+                ${item.warna === "orange" 
+                  ? "border-[#F27405]/20 group-hover:border-[#F27405] group-hover:shadow-md group-hover:shadow-[#F27405]/10" 
+                  : "border-[#A6691F]/20 group-hover:border-[#A6691F] group-hover:shadow-md group-hover:shadow-[#A6691F]/10"
+                }`}
+              >
                 {item.icon}
               </div>
-              <h3 className="relative z-10 font-extrabold text-[#0B1026] text-lg mb-2">{item.judul}</h3>
-              <p className="relative z-10 text-sm text-gray-500 leading-relaxed mb-6">{item.deskripsi}</p>
+
+              <h3 className="relative z-10 font-extrabold text-[#0D0D0D] text-lg mb-2">{item.judul}</h3>
+              <p className="relative z-10 text-sm text-gray-500 leading-relaxed mb-6 font-medium min-h-[4rem]">{item.deskripsi}</p>
               
+              {/* Teks Tautan */}
               <div className={`relative z-10 text-xs font-bold inline-flex items-center gap-1 transition-all group-hover:gap-2 ${
-                item.warna === "violet" ? "text-violet-600" : "text-cyan-600"
+                item.warna === "orange" ? "text-[#F27405]" : "text-[#A6691F]"
               }`}>
                 Lihat karya <span>→</span>
               </div>
@@ -66,7 +71,7 @@ export default function WorksOprec() {
             href="https://www.ukmfriset.or.id"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-violet-600 to-cyan-500 px-8 py-4 text-sm font-bold text-white shadow-lg shadow-violet-500/25 transition-all hover:scale-105 hover:shadow-violet-500/40"
+            className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#F27405] to-[#A6691F] px-8 py-4 text-sm font-extrabold text-white shadow-lg shadow-[#F27405]/20 transition-all hover:scale-105 hover:shadow-[#F27405]/30"
           >
             Kunjungi Website UKM-F Riset <span>→</span>
           </Link>

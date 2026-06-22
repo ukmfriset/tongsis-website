@@ -6,7 +6,6 @@ import BenefitDiklat from "@/components/diklat/BenefitDiklat"
 import InfoDiklat from "@/components/diklat/InfoDiklat"
 import DresscodeDiklat from "@/components/diklat/DresscodeDiklat"
 import TestimonialDiklat from "@/components/diklat/TestimonialDiklat"
-import CommitteeDiklat from "@/components/diklat/CommitteeDiklat"
 import GalleryDiklat from "@/components/diklat/GalleryDiklat"
 import SponsorDiklat from "@/components/diklat/SponsorDiklat"
 import CTADiklat from "@/components/diklat/CTADiklat"
@@ -15,17 +14,37 @@ export default function DiklatPage() {
   return (
     <main className="bg-white">
       <HeroDiklat />
-      <WhatIsDiklat />
-      <TimelineDiklat />
+
+      <section id="tentang">
+        <WhatIsDiklat />
+      </section>
+
+      <section id="timeline">
+        <TimelineDiklat />
+      </section>
+
       <WhyJoinDiklat />
-      <BenefitDiklat />
-      <TestimonialDiklat />
-      <CommitteeDiklat />
+
+      <section id="benefit">
+        <BenefitDiklat />
+      </section>
+
+      <section id="testimoni">
+        <TestimonialDiklat />
+      </section>
+
       <GalleryDiklat />
-      <InfoDiklat />
+
+      <section id="info">
+        <InfoDiklat />
+      </section>
+
       <DresscodeDiklat />
       <SponsorDiklat />
-      <CTADiklat />
+
+      <section id="daftar-tongsis">
+        <CTADiklat />
+      </section>
     </main>
   )
 }

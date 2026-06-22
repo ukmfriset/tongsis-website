@@ -18,46 +18,63 @@ export default function TestimonialDiklat() {
   const next = () => setActive((prev) => (prev + 3 >= testimoni.length ? 0 : prev + 3));
 
   return (
-    <section className="py-24 px-4 bg-[#F8F9FC]">
+    <section className="py-24 px-4 bg-[#F2F2F2]">
       <div className="max-w-6xl mx-auto">
-        {/* Header */}
+        {/* Section Header */}
         <div className="text-center mb-16">
-          <span className="text-xs font-bold tracking-[0.2em] text-violet-600 uppercase">Kata Mereka</span>
-          <h2 className="mt-4 text-4xl md:text-5xl font-extrabold text-[#0B1026] tracking-tight">Apa Kata Mereka Tentang TONGSIS?</h2>
+          <span className="text-xs font-bold tracking-[0.2em] text-[#F27405] uppercase">
+            Kata Mereka
+          </span>
+          <h2 className="mt-4 text-4xl md:text-5xl font-extrabold text-[#0D0D0D] tracking-tight">
+            Kata Mereka yang Udah<br/>Pernah Ada di Posisi Kamu
+          </h2>
         </div>
 
         {/* Carousel Grid */}
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch">
           {[0, 1, 2].map((offset) => {
             const index = (active + offset) % testimoni.length;
             const item = testimoni[index];
             const initials = item.nama.split(" ").map((w) => w[0]).slice(0, 2).join("");
             
-            const isViolet = index % 2 === 0;
-            const borderColor = isViolet ? "border-violet-200" : "border-cyan-200";
-            const hoverShadow = isViolet ? "hover:shadow-[0_20px_50px_-15px_rgba(139,92,246,0.2)]" : "hover:shadow-[0_20px_50px_-15px_rgba(6,182,212,0.2)]";
-            const hoverBg = isViolet ? "bg-violet-600" : "bg-cyan-600";
-            const iconBg = isViolet ? "from-violet-500 to-violet-400" : "from-cyan-500 to-cyan-400";
+            // Logika penentuan warna selang-seling (Orange dan Cokelat)
+            const isOrange = index % 2 === 0;
 
             return (
               <div
                 key={`${item.nama}-${offset}`}
-                className={`group relative overflow-hidden bg-white rounded-[2rem] p-8 border transition-all duration-500 hover:-translate-y-2 ${borderColor} ${hoverShadow}`}
+                className={`group relative overflow-hidden bg-white rounded-[2rem] p-8 border border-gray-100 flex flex-col justify-between transition-all duration-500 hover:-translate-y-2
+                  ${isOrange 
+                    ? "hover:border-[#F27405]/30 hover:shadow-[0_20px_50px_-15px_rgba(242,116,5,0.12)]" 
+                    : "hover:border-[#A6691F]/30 hover:shadow-[0_20px_50px_-15px_rgba(166,105,31,0.12)]"
+                  }`}
               >
-                {/* Hover Overlay */}
-                <div className={`absolute inset-0 opacity-0 group-hover:opacity-[0.03] transition-opacity duration-300 ${hoverBg}`}></div>
+                {/* Overlay Transparan saat Hover */}
+                <div className={`absolute inset-0 opacity-0 group-hover:opacity-[0.015] transition-opacity duration-300 ${isOrange ? "bg-[#F27405]" : "bg-[#A6691F]"}`}></div>
 
-                <div className="relative z-10">
-                  <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${iconBg} flex items-center justify-center text-white font-black text-xl shadow-lg mx-auto mb-6`}>
-                    {initials}
-                  </div>
-                  <div className="text-center">
-                    <span className="text-5xl text-gray-200 font-serif">"</span>
-                    <p className="mt-2 text-gray-600 text-sm leading-relaxed italic line-clamp-6">{item.quote}</p>
-                    <div className="mt-8 pt-6 border-t border-gray-100">
-                      <p className="font-extrabold text-[#0B1026]">{item.nama}</p>
-                      <p className="text-xs text-gray-400 mt-1 font-medium">{item.prodi}</p>
+                <div className="relative z-10 flex flex-col h-full justify-between">
+                  <div>
+                    {/* Wadah Inisial Nama Minimalis Outline-Only */}
+                    <div className={`w-16 h-16 rounded-2xl border-2 bg-transparent flex items-center justify-center font-black text-xl transition-all duration-300 mx-auto mb-6
+                      ${isOrange 
+                        ? "border-[#F27405]/20 text-[#F27405] group-hover:border-[#F27405]" 
+                        : "border-[#A6691F]/20 text-[#A6691F] group-hover:border-[#A6691F]"
+                      }`}
+                    >
+                      {initials}
                     </div>
+                    
+                    {/* Tanda Kutip dan Isi Quote */}
+                    <div className="text-center">
+                      <span className="text-5xl text-gray-200 font-serif leading-none block h-5">"</span>
+                      <p className="mt-4 text-gray-600 text-sm leading-relaxed italic font-medium min-h-[9rem]">{item.quote}</p>
+                    </div>
+                  </div>
+
+                  {/* Identitas Alumni */}
+                  <div className="text-center mt-8 pt-6 border-t border-gray-100">
+                    <p className="font-extrabold text-[#0D0D0D]">{item.nama}</p>
+                    <p className="text-xs text-gray-500 mt-1 font-semibold">{item.prodi}</p>
                   </div>
                 </div>
               </div>
@@ -65,19 +82,32 @@ export default function TestimonialDiklat() {
           })}
         </div>
 
-        {/* Navigasi */}
+        {/* Navigasi / Tombol Kontrol */}
         <div className="flex items-center justify-center gap-6 mt-16">
-          <button onClick={prev} className="w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center text-gray-500 hover:border-violet-500 hover:text-violet-600 transition-all">←</button>
+          <button 
+            onClick={prev} 
+            className="w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center text-gray-500 hover:border-[#F27405] hover:text-[#F27405] hover:bg-[#F27405]/5 transition-all font-bold"
+          >
+            ←
+          </button>
+          
+          {/* Indikator Titik Paginasi */}
           <div className="flex gap-2">
             {[0, 1].map((i) => (
               <button 
                 key={i} 
                 onClick={() => setActive(i * 3)} 
-                className={`h-2 rounded-full transition-all duration-300 ${active / 3 === i ? "w-8 bg-violet-500" : "w-2 bg-gray-300"}`} 
+                className={`h-2 rounded-full transition-all duration-300 ${active / 3 === i ? "w-8 bg-[#F27405]" : "w-2 bg-gray-300"}`} 
               />
             ))}
           </div>
-          <button onClick={next} className="w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center text-gray-500 hover:border-violet-500 hover:text-violet-600 transition-all">→</button>
+          
+          <button 
+            onClick={next} 
+            className="w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center text-gray-500 hover:border-[#F27405] hover:text-[#F27405] hover:bg-[#F27405]/5 transition-all font-bold"
+          >
+            →
+          </button>
         </div>
       </div>
     </section>

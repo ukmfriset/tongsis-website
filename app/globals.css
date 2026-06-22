@@ -1,13 +1,16 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #0B1026;
-  --muted: #64748B;
-  --border: #E5E7EB;
-  --bg-secondary: #F8F9FC;
-  --accent-from: #7C3AED;
-  --accent-to: #06B6D4;
+  /* Palet Warna Baru UKMF Riset & FISIB */
+  --background: #F2F2F2;       /* Off-White dari palet */
+  --foreground: #0D0D0D;       /* Black/Charcoal pekat untuk teks utama */
+  --muted: #8C8C8C;            /* Grey untuk teks sekunder/caption */
+  --border: #E5E7EB;           /* Border abu-abu halus standar */
+  --bg-secondary: #FFFFFF;     /* Putih bersih untuk background kartu/konten */
+  
+  /* Gradasi Utama */
+  --accent-from: #F27405;      /* Orange khas FISIB */
+  --accent-to: #A6691F;        /* Cokelat Emas identitas Riset */
 }
 
 @theme inline {
@@ -17,7 +20,11 @@
   --color-border: var(--border);
   --color-bg-secondary: var(--bg-secondary);
   
-  /* Kembali ke konfigurasi awal */
+  /* Akses cepat untuk variabel gradasi baru di utility class Tailwind */
+  --color-accent-from: var(--accent-from);
+  --color-accent-to: var(--accent-to);
+  
+  /* Konfigurasi Font */
   --font-sans: var(--font-inter);
   --font-heading: var(--font-space);
 }

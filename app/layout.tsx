@@ -3,16 +3,16 @@ import { Inter, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import BackToTop from "@/components/BackToTop"; 
 
-// 1. Inisialisasi font
 const inter = Inter({
   subsets: ["latin"],
-  variable: "--font-inter", // Mendefinisikan variabel CSS
+  variable: "--font-inter", 
 });
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
-  variable: "--font-space", // Mendefinisikan variabel CSS
+  variable: "--font-space", 
 });
 
 export const metadata: Metadata = {
@@ -27,21 +27,28 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    /* 
-       2. Terapkan variabel font ke tag <html> agar dapat 
-       diakses oleh seluruh komponen di dalam aplikasi
-    */
-    <html lang="id" className={`${inter.variable} ${spaceGrotesk.variable}`}>
-      {/* 
-          3. 'font-sans' akan merujuk ke Inter (diatur di globals.css)
-          4. 'antialiased' memastikan teks terlihat halus di semua browser
-      */}
-      <body className="antialiased font-sans">
+    /* PERBAIKAN SAKTI TAILWIND v4: 
+       1. Menambahkan 'h-full' pada html agar window viewports terbaca 100% oleh browser.
+       2. Mengubah 'min-h-screen' pada body menjadi 'min-h-full' agar pembagian flexbox tidak kaku. */
+    <html 
+      lang="id" 
+      className={`${inter.variable} ${spaceGrotesk.variable} scroll-smooth h-full`}
+      data-scroll-behavior="smooth"
+    >
+      <body className="antialiased font-sans bg-background text-foreground min-h-full flex flex-col">
+        {/* Navbar sticky */}
         <Navbar />
-        <div className="pt-24">
+        
+        {/* PERBAIKAN: Menambahkan 'flex flex-col w-full' agar children di dalamnya 
+            bisa mengeksekusi perhitungan unit 'vh' secara presisi dari atas sampai bawah */}
+        <div className="pt-0 flex-1 flex flex-col w-full">
           {children}
         </div>
+        
         <Footer />
+
+        {/* Tombol Back to Top */}
+        <BackToTop />
       </body>
     </html>
   );

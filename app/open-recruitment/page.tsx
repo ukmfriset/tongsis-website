@@ -14,16 +14,38 @@ export default function OpenRecruitmentPage() {
   return (
     <main className="bg-white">
       <HeroOprec />
-      <AboutOprec />
+
+      <section id="tentang">
+        <AboutOprec />
+      </section>
+
       <WhyJoinOprec />
-      <AchievementsOprec />
+
+      <section id="prestasi">
+        <AchievementsOprec />
+      </section>
+
       <WorksOprec />
-      <TestimonialOprec />
+
+      <section id="testimoni">
+        <TestimonialOprec />
+      </section>
+
       <GalleryOprec />
-      <RequirementsOprec />
-      <TimelineOprec />
+
+      <section id="persyaratan">
+        <RequirementsOprec />
+      </section>
+
+      <section id="timeline">
+        <TimelineOprec />
+      </section>
+
       <AnnouncementOprec />
-      <CTAOprec />
+
+      <section id="daftar">
+        <CTAOprec />
+      </section>
     </main>
   )
 }

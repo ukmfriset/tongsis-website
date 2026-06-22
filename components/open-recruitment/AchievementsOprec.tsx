@@ -13,19 +13,18 @@ export default function AchievementsOprec() {
   const levelIcon: Record<string, string> = { Nasional: "🏆", Regional: "🥈" };
 
   return (
-    <section className="py-24 px-4 bg-[#F8F9FC]">
+    <section className="py-24 px-4 bg-[#F2F2F2]">
       <div className="mx-auto max-w-5xl">
         {/* Section Header */}
         <div className="text-center mb-16">
-          <span className="text-xs font-bold tracking-[0.2em] text-violet-600 uppercase">
+          <span className="text-xs font-bold tracking-[0.2em] text-[#F27405] uppercase">
             Bukti Nyata
           </span>
-          <h2 className="mt-4 text-4xl md:text-5xl font-extrabold text-[#0B1026] tracking-tight">
-            Prestasi Anggota Riset
+          <h2 className="mt-4 text-4xl md:text-5xl font-extrabold text-[#0D0D0D] tracking-tight">
+            Bukan Omong Doang<br/>Ini Buktinya
           </h2>
-          <p className="mt-6 text-gray-600 max-w-2xl mx-auto text-lg leading-relaxed">
-            Melalui semangat belajar dan berkarya, anggota UKMF RISET FISIB UTM telah meraih 
-            berbagai pencapaian membanggakan di tingkat regional maupun nasional.
+          <p className="mt-6 text-gray-600 max-w-2xl mx-auto text-lg leading-relaxed font-medium">
+            Anggota UKM-F Riset udah buktiin — karya mereka diakui sampai tingkat nasional.
           </p>
         </div>
 
@@ -36,31 +35,44 @@ export default function AchievementsOprec() {
               key={index}
               className={`group relative overflow-hidden bg-white rounded-[2rem] p-8 border transition-all duration-300 hover:-translate-y-2 
               ${item.level === "Nasional" 
-                ? "border-gray-100 hover:border-violet-300 hover:shadow-[0_20px_50px_-15px_rgba(139,92,246,0.15)]" 
-                : "border-gray-100 hover:border-cyan-300 hover:shadow-[0_20px_50px_-15px_rgba(6,182,212,0.15)]"}`}
+                ? "border-gray-100 hover:border-[#F27405]/30 hover:shadow-[0_20px_50px_-15px_rgba(242,116,5,0.12)]" 
+                : "border-gray-100 hover:border-[#A6691F]/30 hover:shadow-[0_20px_50px_-15px_rgba(166,105,31,0.12)]"}`}
             >
-              {/* Overlay Warna saat Hover */}
-              <div className={`absolute inset-0 opacity-0 group-hover:opacity-[0.03] transition-opacity duration-300 ${item.level === "Nasional" ? "bg-violet-600" : "bg-cyan-600"}`}></div>
+              {/* Overlay Transparan saat Hover */}
+              <div className={`absolute inset-0 opacity-0 group-hover:opacity-[0.015] transition-opacity duration-300 ${item.level === "Nasional" ? "bg-[#F27405]" : "bg-[#A6691F]"}`}></div>
 
               {/* Icon & Level Badge */}
               <div className="relative z-10 flex items-center justify-between mb-6">
-                <span className="text-3xl">{levelIcon[item.level]}</span>
+                
+                {/* Wadah Icon Minimalis (Outline-Only) */}
+                <div className={`w-14 h-14 rounded-2xl flex items-center justify-center text-2xl border-2 bg-transparent transition-all duration-300 
+                  ${item.level === "Nasional" 
+                    ? "border-[#F27405]/20 group-hover:border-[#F27405] group-hover:shadow-md group-hover:shadow-[#F27405]/10" 
+                    : "border-[#A6691F]/20 group-hover:border-[#A6691F] group-hover:shadow-md group-hover:shadow-[#A6691F]/10"
+                  }`}
+                >
+                  {levelIcon[item.level]}
+                </div>
+
+                {/* Badge Keterangan Level */}
                 <span className={`text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider ${
-                  item.level === "Nasional" ? "bg-violet-50 text-violet-600" : "bg-cyan-50 text-cyan-600"
+                  item.level === "Nasional" 
+                    ? "bg-[#F27405]/10 text-[#F27405]" 
+                    : "bg-[#A6691F]/10 text-[#A6691F]"
                 }`}>
                   {item.level}
                 </span>
               </div>
 
               {/* Prestasi */}
-              <h4 className="relative z-10 font-extrabold text-[#0B1026] text-lg leading-snug mb-6">
+              <h4 className="relative z-10 font-extrabold text-[#0D0D0D] text-lg leading-snug mb-6 min-h-[3.5rem]">
                 {item.prestasi}
               </h4>
 
               {/* Profil */}
               <div className="relative z-10 pt-6 border-t border-gray-100">
-                <p className="font-bold text-[#0B1026] text-sm">{item.nama}</p>
-                <p className="text-xs text-gray-400 mt-1">{item.prodi}</p>
+                <p className="font-extrabold text-[#0D0D0D] text-sm">{item.nama}</p>
+                <p className="text-xs text-gray-500 font-medium mt-1">{item.prodi}</p>
               </div>
             </div>
           ))}

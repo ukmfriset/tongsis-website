@@ -5,7 +5,9 @@ export default function Home() {
   return (
     <main className="bg-white">
       <HeroHome />
-      <ChoiceCardsHome />
+      <section id="pilih">
+        <ChoiceCardsHome />
+      </section>
     </main>
   )
 }
