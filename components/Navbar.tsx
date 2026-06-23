@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -29,6 +30,7 @@ const pageLinks = [
 
 export default function Navbar() {
   const pathname = usePathname();
+  const [isOpen, setIsOpen] = useState(false); // State untuk mengontrol menu mobile
 
   const isOprec = pathname === "/open-recruitment";
   const isDiklat = pathname === "/diklat";
@@ -58,7 +60,7 @@ export default function Navbar() {
       <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
 
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-1 select-none group">
+        <Link href="/" className="flex items-center gap-1 select-none group" onClick={() => setIsOpen(false)}>
           <span className="font-black text-lg text-[#0D0D0D] tracking-tight">
             TONGSIS
           </span>
@@ -67,7 +69,7 @@ export default function Navbar() {
           </span>
         </Link>
 
-        {/* Nav Links — anchor atau halaman, tergantung konteks */}
+        {/* DESKTOP NAV LINKS */}
         <div className="hidden md:flex items-center gap-8">
           {navLinks.map((item) => {
             const isPageActive =
@@ -93,14 +95,84 @@ export default function Navbar() {
           })}
         </div>
 
-        {/* CTA Button */}
-        <Link
-          href={ctaHref}
-          className="rounded-full bg-gradient-to-r from-[#F27405] to-[#A6691F] px-6 py-2.5 text-sm font-extrabold text-white transition-all hover:scale-105 shadow-md shadow-[#F27405]/10 hover:shadow-[#F27405]/20"
-        >
-          {ctaLabel}
-        </Link>
+        {/* DESKTOP CTA BUTTON */}
+        <div className="hidden md:block">
+          <Link
+            href={ctaHref}
+            className="rounded-full bg-gradient-to-r from-[#F27405] to-[#A6691F] px-6 py-2.5 text-sm font-extrabold text-white transition-all hover:scale-105 shadow-md shadow-[#F27405]/10 hover:shadow-[#F27405]/20"
+          >
+            {ctaLabel}
+          </Link>
+        </div>
 
+        {/* MOBILE HAMBURGER BUTTON (Garis 3) */}
+        <button
+          onClick={() => setIsOpen(!isOpen)}
+          type="button"
+          aria-label="Toggle menu"
+          className="flex md:hidden flex-col justify-center items-center w-8 h-8 gap-1.5 z-50 focus:outline-none"
+        >
+          {/* Animasi Garis 1 */}
+          <span
+            className={`h-0.5 w-6 rounded-full bg-[#0D0D0D] transition-all duration-300 ease-in-out ${
+              isOpen ? "rotate-45 translate-y-2" : ""
+            }`}
+          />
+          {/* Animasi Garis 2 (Hilang saat open) */}
+          <span
+            className={`h-0.5 w-6 rounded-full bg-[#0D0D0D] transition-all duration-300 ease-in-out ${
+              isOpen ? "opacity-0" : ""
+            }`}
+          />
+          {/* Animasi Garis 3 */}
+          <span
+            className={`h-0.5 w-6 rounded-full bg-[#0D0D0D] transition-all duration-300 ease-in-out ${
+              isOpen ? "-rotate-45 -translate-y-2" : ""
+            }`}
+          />
+        </button>
+
+      </div>
+
+      {/* MOBILE DROPDOWN MENU PANEL */}
+      <div
+        className={`md:hidden absolute top-16 left-0 right-0 bg-white border-b border-gray-100 shadow-xl transition-all duration-300 ease-in-out overflow-hidden ${
+          isOpen ? "max-h-[400px] opacity-100 py-6" : "max-h-0 opacity-0 py-0"
+        }`}
+      >
+        <div className="flex flex-col px-6 gap-4">
+          {navLinks.map((item) => {
+            const isPageActive =
+              !item.href.startsWith("#") && pathname === item.href;
+
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                onClick={() => setIsOpen(false)} // Tutup menu setelah diklik
+                className={`text-base font-extrabold tracking-wide py-2 border-b border-gray-50 transition-colors
+                  ${
+                    isPageActive
+                      ? "text-[#F27405]"
+                      : "text-gray-600 hover:text-[#0D0D0D]"
+                  }`}
+              >
+                {item.name}
+              </Link>
+            );
+          })}
+
+          {/* MOBILE CTA BUTTON */}
+          <div className="pt-2">
+            <Link
+              href={ctaHref}
+              onClick={() => setIsOpen(false)}
+              className="block text-center rounded-full bg-gradient-to-r from-[#F27405] to-[#A6691F] py-3 text-sm font-extrabold text-white shadow-md shadow-[#F27405]/10"
+            >
+              {ctaLabel}
+            </Link>
+          </div>
+        </div>
       </div>
     </nav>
   );
