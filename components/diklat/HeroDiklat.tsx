@@ -1,8 +1,36 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import Link from "next/link";
+import { client } from "@/src/sanity/client"; // Jalur absolut root alias andalanmu
+
+interface HeroDiklatData {
+  tahunPelaksanaan?: string;
+  linkDiklat?: string;
+}
 
 export default function HeroDiklat() {
+  const [sanityData, setSanityData] = useState<HeroDiklatData | null>(null);
+
+  // Ambil data dari pusat kendali global (siteSettings)
+  useEffect(() => {
+    async function fetchHeroData() {
+      try {
+        const query = `*[_type == "siteSettings" && _id == "siteSettings"][0]{ tahunPelaksanaan, linkDiklat }`;
+        const data = await client.fetch(query);
+        if (data) setSanityData(data);
+      } catch (error) {
+        console.error("Gagal mengambil data Hero Diklat dari Sanity:", error);
+      }
+    }
+    fetchHeroData();
+  }, []);
+
+  // SYSTEM FALLBACK: Jika di Sanity masih kosong, otomatis pakai data default bawaanmu
+  const tahunTampil = sanityData?.tahunPelaksanaan || "2026";
+  const ctaHref = sanityData?.linkDiklat || "#";
+  const isExternalCta = ctaHref.startsWith("http");
+
   return (
     /* SINKRONISASI ELEMEN DIKLAT MOBILE:
        - pt-40 di HP memastikan judul dan badge aman dari tabrakan header putih.
@@ -16,31 +44,35 @@ export default function HeroDiklat() {
       {/* ─── KONTEN UTAMA ─── */}
       <div className="relative z-10 flex flex-col items-center max-w-4xl mx-auto space-y-4 md:space-y-6">
 
-        {/* Badge Status Minimalis (Outline-Only) */}
+        {/* Badge Status Minimalis (Outline-Only) — Tahun dinamis dari Sanity */}
         <div className="mb-4 md:mb-2 inline-flex items-center gap-2 rounded-full border border-[#F27405]/20 bg-transparent px-5 md:px-6 py-2">
           <span className="h-2.5 w-2.5 rounded-full bg-[#F27405] animate-pulse"></span>
           <span className="text-[10px] md:text-xs font-extrabold tracking-[0.2em] text-[#F27405] uppercase">
-            Pendaftaran TONGSIS 2026 Dibuka
+            Pendaftaran TONGSIS {tahunTampil} Dibuka
           </span>
         </div>
 
-        {/* Heading — PERBAIKAN: Menghapus properti inline-block yang duplikat */}
-        <h1 className="text-4xl md:text-7xl font-extrabold text-[#0D0D0D] leading-[1.15] md:leading-[1.1] tracking-tighter max-w-3xl px-2 md:px-0">
+        {/* Heading — FIX SELEKTIF: TULISAN HITAM TETAP DIAM, HANYA GRADASI YANG MEMBESAR TANPA BERUBAH FONT */}
+        <h1 className="font-heading text-4xl md:text-7xl font-extrabold text-[#0D0D0D] leading-[1.15] md:leading-[1.1] tracking-tighter max-w-3xl px-2 md:px-0">
           Selamat, Kamu Lolos!🎉<br />
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#F27405] to-[#A6691F] pb-1 block mt-2 transition-transform duration-500 ease-out hover:scale-105 cursor-pointer">
-            Saatnya Melangkah
-          </span> ke Tahap Berikutnya
+          <span className="inline-block transition-transform duration-500 ease-out hover:scale-105 cursor-pointer mt-2">
+            <span className="font-heading text-transparent bg-clip-text bg-gradient-to-r from-[#F27405] to-[#A6691F] pb-1 block">
+              Perjalananmu Baru Saja Dimulai
+            </span>
+          </span>
         </h1>
 
-        {/* Description */}
+        {/* Description — Tahun dinamis dari Sanity */}
         <p className="max-w-xl text-sm md:text-lg leading-relaxed font-sans font-medium text-gray-600 px-2 md:px-0">
-          TONGSIS 2026 menjadi awal perjalananmu bersama UKM-F Riset melalui berbagai pengalaman belajar, pengembangan diri, dan kebersamaan.
+          TONGSIS {tahunTampil} menjadi awal perjalananmu bersama UKM-F Riset melalui berbagai pengalaman belajar, pengembangan diri, dan kebersamaan.
         </p>
 
-        {/* Action Buttons */}
+        {/* Action Buttons — Link pendaftaran dikontrol 1 pintu dari Sanity */}
         <div className="pt-2 flex flex-col sm:flex-row gap-4 justify-center w-full sm:w-auto px-6 sm:px-0">
           <Link
-            href="#"
+            href={ctaHref}
+            target={isExternalCta ? "_blank" : undefined}
+            rel={isExternalCta ? "noopener noreferrer" : undefined}
             className="w-full sm:w-auto text-center rounded-full bg-gradient-to-r from-[#F27405] to-[#A6691F] px-10 py-3.5 md:py-4 text-sm font-extrabold text-white transition-all hover:scale-105 shadow-xl shadow-[#F27405]/20"
           >
             Gas, Daftar TONGSIS →

@@ -2,16 +2,11 @@ import { defineType, defineField } from 'sanity'
 
 export const ctaoprec = defineType({
   name: 'ctaoprec',
-  title: 'Pengaturan CTA & Kontak Oprec',
+  title: 'Pengaturan Kontak Oprec',
   type: 'document',
   fields: [
-    defineField({
-      name: 'linkDaftar',
-      title: 'Link Formulir Pendaftaran',
-      type: 'url',
-      description: 'Contoh: https://bit.ly/form-oprec-riset',
-      validation: (Rule) => Rule.required(),
-    }),
+    // ❌ Field linkDaftar resmi dihapus karena sudah terpusat di siteSettings
+    
     defineField({
       name: 'contactPersons',
       title: 'Daftar Narahubung (CP)',

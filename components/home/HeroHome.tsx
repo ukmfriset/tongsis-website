@@ -27,11 +27,13 @@ export default function HeroHome() {
           Selamat Datang, Calon Anggota Baru 👋
         </h2>
 
-        {/* 3. Title Utama Gradasi */}
+        {/* 3. Title Utama Gradasi — SOLUSI ISOLASI LAYER DENGAN FONT-HEADING */}
         <div className="pt-2 w-full">
-          <h1 className="font-heading text-5xl md:text-8xl font-extrabold leading-none tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-[#F27405] via-[#e06600] to-[#A6691F] transition-all duration-500 ease-out hover:scale-105 cursor-pointer inline-block">
-            TONGSIS 2026
-          </h1>
+          <div className="inline-block transition-transform duration-500 ease-out hover:scale-105 cursor-pointer">
+            <h1 className="font-heading text-5xl md:text-8xl font-extrabold leading-none tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-[#F27405] via-[#e06600] to-[#A6691F]">
+              TONGSIS 2026
+            </h1>
+          </div>
           
           {/* Subtitle Arti Akronim */}
           <p className="mt-4 text-[10px] md:text-sm text-gray-400 max-w-md md:max-w-full mx-auto font-bold uppercase tracking-wide whitespace-normal font-sans break-words">
@@ -41,9 +43,7 @@ export default function HeroHome() {
 
         {/* Description */}
         <p className="pt-2 text-[#0D0D0D] max-w-2xl text-sm md:text-lg leading-relaxed font-sans font-medium px-2 md:px-0">
-          Riset bukan sekadar tugas yang selesai dikerjakan lalu dilupakan. Riset adalah proses memahami persoalan, menemukan gagasan, dan menghasilkan solusi yang bermanfaat.
-          Melalui <span className="font-extrabold text-[#F27405]">UKM-F RISET FISIB UTM</span>, mahasiswa memiliki ruang untuk belajar, berdiskusi, berkarya, dan berkembang bersama.
-          TONGSIS 2026 menjadi langkah awal untuk mengenal lebih dekat nilai, budaya, dan perjalanan di UKM-F RISET FISIB UTM.
+          Riset adalah proses memahami persoalan, mengembangkan ide, dan menciptakan solusi. Melalui TONGSIS 2026, kamu akan mengenal lebih dekat <span className="font-extrabold text-[#F27405]">UKM-F RISET FISIB UTM</span> sebagai ruang belajar, berdiskusi, dan berkarya bersama.
         </p>
 
         {/* Scroll/Divider Indicator */}

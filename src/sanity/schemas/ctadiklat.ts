@@ -2,23 +2,19 @@ import { defineType, defineField } from 'sanity'
 
 export const ctadiklat = defineType({
   name: 'ctadiklat',
-  title: 'Link Pendaftaran & CP Diklat',
+  title: 'CP Diklat TONGSIS',
   type: 'document',
   fields: [
     defineField({
       name: 'title',
       title: 'Nama Konfigurasi',
       type: 'string',
-      initialValue: 'Pengaturan Link Utama Diklat',
-      hidden: true, // Biar gak membingungkan panitia, kolom ini kita sembunyikan
+      initialValue: 'Pengaturan Kontak Diklat',
+      hidden: true, // Kolom ini tetap tersembunyi agar dashboard rapi
     }),
-    defineField({
-      name: 'linkPendaftaran',
-      title: 'Link Formulir Pendaftaran TONGSIS',
-      type: 'url',
-      description: 'Masukkan link Google Form / Website pendaftaran aktif. Contoh: https://forms.gle/...',
-      validation: (Rule) => Rule.required(),
-    }),
+    
+    // ❌ Field linkPendaftaran resmi dihapus karena sudah terpusat di siteSettings
+
     defineField({
       name: 'cp1_nama',
       title: 'Nama Narahubung 1',

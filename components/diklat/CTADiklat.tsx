@@ -28,22 +28,36 @@ const defaultCTA: CTAData = {
 export default function CTADiklat() {
   const [cta, setCta] = useState<CTAData>(defaultCTA);
 
-  // Ambil data tautan tunggal dari dokumen ID 'ctadiklat'
+  // Ambil data tautan dari siteSettings (Global) dan data CP dari dokumen 'ctadiklat'
   useEffect(() => {
     async function fetchCTAData() {
       try {
-        const query = `*[_type == "ctadiklat" && _id == "ctadiklat"][0]{
-          linkPendaftaran,
-          cp1_nama,
-          cp1_nomor,
-          cp1_link,
-          cp2_nama,
-          cp2_nomor,
-          cp2_link
+        // Query paralel: mengambil linkDiklat dari siteSettings, dan CP dari ctadiklat
+        const query = `{
+          "settings": *[_type == "siteSettings" && _id == "siteSettings"][0]{ linkDiklat },
+          "contacts": *[_type == "ctadiklat"][0]{
+            cp1_nama,
+            cp1_nomor,
+            cp1_link,
+            cp2_nama,
+            cp2_nomor,
+            cp2_link
+          }
         }`;
+        
         const data = await client.fetch(query);
+        
         if (data) {
-          setCta(data);
+          setCta({
+            // Memetakan link pendaftaran langsung mengikuti kendali utama di Navbar/Hero
+            linkPendaftaran: data.settings?.linkDiklat || defaultCTA.linkPendaftaran,
+            cp1_nama: data.contacts?.cp1_nama || defaultCTA.cp1_nama,
+            cp1_nomor: data.contacts?.cp1_nomor || defaultCTA.cp1_nomor,
+            cp1_link: data.contacts?.cp1_link || defaultCTA.cp1_link,
+            cp2_nama: data.contacts?.cp2_nama || defaultCTA.cp2_nama,
+            cp2_nomor: data.contacts?.cp2_nomor || defaultCTA.cp2_nomor,
+            cp2_link: data.contacts?.cp2_link || defaultCTA.cp2_link,
+          });
         }
       } catch (error) {
         console.error("Gagal memuat data tautan CTA Diklat dari Sanity:", error);
@@ -57,6 +71,8 @@ export default function CTADiklat() {
     { nama: cta.cp1_nama, nomor: cta.cp1_nomor, link: cta.cp1_link, warna: "orange" },
     { nama: cta.cp2_nama, nomor: cta.cp2_nomor, link: cta.cp2_link, warna: "brown" },
   ];
+
+  const isExternalCta = cta.linkPendaftaran.startsWith("http");
 
   return (
     <section className="py-24 px-4 bg-[#F2F2F2]">
@@ -74,6 +90,8 @@ export default function CTADiklat() {
           <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               href={cta.linkPendaftaran}
+              target={isExternalCta ? "_blank" : undefined}
+              rel={isExternalCta ? "noopener noreferrer" : undefined}
               className="rounded-full bg-white px-10 py-4 text-sm font-extrabold text-[#F27405] transition-all hover:scale-105 hover:shadow-lg hover:shadow-black/10"
             >
               Daftar TONGSIS Sekarang →

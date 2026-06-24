@@ -11,11 +11,6 @@ interface ContactPerson {
   warna: "orange" | "brown";
 }
 
-interface CTAData {
-  linkDaftar: string;
-  contactPersons: ContactPerson[];
-}
-
 // Data default bawaan asli kamu (Sistem Fallback)
 const defaultCP: ContactPerson[] = [
   { nama: "Dinda", nomor: "0857-3019-7634", link: "https://wa.me/6285730197634", warna: "orange" },
@@ -26,17 +21,25 @@ export default function CTAOprec() {
   const [linkDaftar, setLinkDaftar] = useState<string>("#");
   const [contactPersons, setContactPersons] = useState<ContactPerson[]>(defaultCP);
 
-  // Ambil data CTA & CP dari Sanity
+  // Ambil data dari siteSettings (untuk Link) dan ctaoprec (untuk CP) secara paralel
   useEffect(() => {
     async function fetchCTAData() {
       try {
-        const query = `*[_type == "ctaoprec"][0]{ linkDaftar, contactPersons }`;
+        // Query paralel: mengambil linkOprec dari siteSettings, dan CP dari ctaoprec
+        const query = `{
+          "settings": *[_type == "siteSettings" && _id == "siteSettings"][0]{ linkOprec },
+          "cta": *[_type == "ctaoprec"][0]{ contactPersons }
+        }`;
+        
         const data = await client.fetch(query);
         
         if (data) {
-          if (data.linkDaftar) setLinkDaftar(data.linkDaftar);
-          if (data.contactPersons && data.contactPersons.length > 0) {
-            setContactPersons(data.contactPersons);
+          // Sinkronisasi link daftar mengikuti pusat kendali navbar/hero global
+          if (data.settings?.linkOprec) setLinkDaftar(data.settings.linkOprec);
+          
+          // Sinkronisasi data CP dari dokumen ctaoprec
+          if (data.cta?.contactPersons && data.cta.contactPersons.length > 0) {
+            setContactPersons(data.cta.contactPersons);
           }
         }
       } catch (error) {
@@ -45,6 +48,8 @@ export default function CTAOprec() {
     }
     fetchCTAData();
   }, []);
+
+  const isExternalCta = linkDaftar.startsWith("http");
 
   return (
     <section className="py-24 px-4 bg-[#F2F2F2]">
@@ -59,14 +64,14 @@ export default function CTAOprec() {
           </p>
 
           <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
-            <a 
+            <Link 
               href={linkDaftar}
-              target="_blank"
-              rel="noopener noreferrer"
+              target={isExternalCta ? "_blank" : undefined}
+              rel={isExternalCta ? "noopener noreferrer" : undefined}
               className="rounded-full bg-white px-10 py-4 text-sm font-extrabold text-[#F27405] transition-all hover:scale-105 hover:shadow-lg hover:shadow-black/10"
             >
               Daftar Sekarang →
-            </a>
+            </Link>
             <a 
               href="https://www.ukmfriset.or.id" 
               target="_blank" 
