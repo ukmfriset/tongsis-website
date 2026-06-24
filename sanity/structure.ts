@@ -60,7 +60,7 @@ export const structure: StructureResolver = (S) =>
         ),
 
       // ==========================================
-      // 3. KELOMPOK KONTEN DIKLAT TONGSIS
+      // 3. KELOMPOK KONTEN DIKLAT TONGSIS (AMBLES & BERSIH)
       // ==========================================
       S.listItem()
         .id('exclusiveGroupDiklatTongsis') 
@@ -70,25 +70,38 @@ export const structure: StructureResolver = (S) =>
             .title('Kelola Komponen Diklat')
             .items([
               
-              S.documentTypeListItem('timelinediklat')
-                .title('⏳ Alur Timeline Diklat'),
-                
-              S.documentTypeListItem('testimonialdiklat')
-                .title('💬 Daftar Testimoni Diklat TONGSIS'),
-
-              S.documentTypeListItem('gallerydiklat')
-                .title('📷 Dokumentasi Kegiatan TONGSIS'), // <-- Jangan lupa tanda koma di ujung ini!
-
-              S.documentTypeListItem('infodiklat')
-                .title('📌 Informasi Pelaksanaan Diklat'),
-              
-              S.documentTypeListItem('infodiklat')
-                .title('📌 Informasi Pelaksanaan Diklat'),
-              
-              S.documentTypeListItem('sponsordiklat')
-                .title('🤝 Daftar Sponsor & Mitra Diklat'),
               S.listItem()
-                .id('singletonCtaDiklat')
+                .id('diklatTimelineMenu-Unique')
+                .title('⏳ Alur Timeline Diklat')
+                .child(S.documentTypeList('timelinediklat').title('Alur Timeline Diklat')),
+                
+              S.listItem()
+                .id('diklatTestimonialMenu-Unique')
+                .title('💬 Daftar Testimoni Diklat TONGSIS')
+                .child(S.documentTypeList('testimonialdiklat').title('Testimoni Diklat TONGSIS')),
+
+              S.listItem()
+                .id('diklatGalleryMenu-Unique')
+                .title('📷 Dokumentasi Kegiatan TONGSIS')
+                .child(S.documentTypeList('gallerydiklat').title('Dokumentasi Kegiatan TONGSIS')),
+
+              S.listItem()
+                .id('diklatInfoMenu-Unique') // Mengunci ID Unik agar infodiklat tidak eror lagi!
+                .title('📌 Informasi Pelaksanaan Diklat')
+                .child(S.documentTypeList('infodiklat').title('Informasi Pelaksanaan Diklat')),
+
+              S.listItem()
+                .id('diklatDresscodeMenu-Unique') // Dresscode kamu aman terpasang di sini
+                .title('👕 Dresscode Kegiatan Diklat')
+                .child(S.documentTypeList('dresscodediklat').title('Dresscode Kegiatan Diklat')),
+                
+              S.listItem()
+                .id('diklatSponsorMenu-Unique')
+                .title('🤝 Daftar Sponsor & Mitra Diklat')
+                .child(S.documentTypeList('sponsordiklat').title('Daftar Sponsor & Mitra Diklat')),
+
+              S.listItem()
+                .id('singletonCtaDiklat-Unique')
                 .title('🔗 Link Pendaftaran & CP Diklat')
                 .schemaType('ctadiklat')
                 .child(
@@ -98,11 +111,7 @@ export const structure: StructureResolver = (S) =>
                     .title('Link Pendaftaran & CP Utama Diklat')
                 ),
                 
-              // 🟢 KALO NEXT MAU NAMBAH MENU DIKLAT BARU, MASUKKAN DI SINI, BRO! 👇
-              // Contoh format pengetikan (buka tanda komentar jika ingin dipakai):
-              // S.documentTypeListItem('NAMA_SKEMA_BARU').title('📌 JUDUL_MENU_BEBAS'),
-              
-              // 🟢 JANGAN MELEWATI BATAS INI SAAT MENAMBAH ITEM BARU 👆
+              // 🟢 KALO NEXT MAU NAMBAH MENU DIKLAT BARU, TINGGAL COPAST DI BAWAH SINI, BRO!
             ])
         ),
 
