@@ -4,40 +4,50 @@ import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import Navbar from "@/components/Navbar"; 
 import Footer from "@/components/Footer"; 
-import { client } from "../src/sanity/client"; // Jalur relatif akurat andalanmu
+import { client } from "@/src/sanity/client"; // Menggunakan jalur absolut root alias andalanmu
 import "./globals.css";
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const isStudioPage = pathname.startsWith("/studio");
 
-  // State default (Warna awal bawaan aslimu)
+  // State default (Warna awal bawaan aslimu & Tahun default)
   const [theme, setTheme] = useState({
     accentFrom: "#F27405",
     accentTo: "#A6691F",
     fontHeading: "Space Grotesk",
     fontBody: "Inter"
   });
+  
+  const [tahunTampil, setTahunTampil] = useState("2026");
 
-  // Ambil konfigurasi visual dari Sanity
+  // Ambil konfigurasi visual & pengaturan utama dari Sanity secara bersamaan
   useEffect(() => {
-    async function fetchTheme() {
+    async function fetchSanityData() {
       try {
-        const query = `*[_type == "themeSettings"][0]{ accentFrom, accentTo, fontHeading, fontBody }`;
-        const data = await client.fetch(query);
-        if (data) {
+        // Ambil data tema dinamis
+        const themeQuery = `*[_type == "themeSettings"][0]{ accentFrom, accentTo, fontHeading, fontBody }`;
+        const themeData = await client.fetch(themeQuery);
+        if (themeData) {
           setTheme({
-            accentFrom: data.accentFrom || "#F27405",
-            accentTo: data.accentTo || "#A6691F",
-            fontHeading: data.fontHeading || "Space Grotesk",
-            fontBody: data.fontBody || "Inter"
+            accentFrom: themeData.accentFrom || "#F27405",
+            accentTo: themeData.accentTo || "#A6691F",
+            fontHeading: themeData.fontHeading || "Space Grotesk",
+            fontBody: themeData.fontBody || "Inter"
           });
         }
+
+        // Ambil data tahun pelaksanaan dari pengaturan utama website (siteSettings)
+        const settingsQuery = `*[_type == "siteSettings" && _id == "siteSettings"][0]{ tahunPelaksanaan }`;
+        const settingsData = await client.fetch(settingsQuery);
+        if (settingsData?.tahunPelaksanaan) {
+          setTahunTampil(settingsData.tahunPelaksanaan);
+        }
       } catch (error) {
-        console.error("Gagal memuat tema dinamis dari Sanity:", error);
+        console.error("Gagal memuat data dinamis dari Sanity:", error);
       }
     }
-    fetchTheme();
+    fetchSanityData();
   }, []);
 
   // Ubah spasi jadi tanda + untuk format URL Google Fonts
@@ -46,6 +56,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="id">
       <head>
+        {/* ─── SOLUSI UNTUK CLIENT COMPONENT: SUNTIK TITLE DINAMIS DI SINI ─── */}
+        <title>{`TONGSIS ${tahunTampil} - UKM-F RISET FISIB UTM`}</title>
+        <meta name="description" content={`Training of Good Skill of People to Imagination and Smarter ${tahunTampil} - Ruang belajar riset, berdiskusi, dan berkarya bersama UKM-F Riset FISIB UTM.`} />
+        <link rel="icon" href="/favicon.ico" />
+
         {/* Mengunduh font Google secara dinamis berdasarkan pilihan di Sanity */}
         <link
           href={`https://fonts.googleapis.com/css2?family=${formatFontName(theme.fontBody)}:wght@300;400;500;600;700&family=${formatFontName(theme.fontHeading)}:wght@600;700;800&display=swap`}
