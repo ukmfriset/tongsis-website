@@ -56,9 +56,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="id">
       <head>
-        {/* ─── SOLUSI UNTUK CLIENT COMPONENT: SUNTIK TITLE DINAMIS DI SINI ─── */}
+        {/* ─── TITLE MAKSIMAL KAPITAL SESUAI PILIHANMU ─── */}
         <title>{`TONGSIS ${tahunTampil} - UKM-F RISET FISIB UTM`}</title>
-        <meta name="description" content={`Training of Good Skill of People to Imagination and Smarter ${tahunTampil} - Ruang belajar riset, berdiskusi, dan berkarya bersama UKM-F Riset FISIB UTM.`} />
+        <meta name="description" content={`Training of Good Skill of People to Imagination and Smarter ${tahunTampil} - Ruang belajar riset, berdiskusi, dan berkarya bersama UKM-F RISET FISIB UTM.`} />
         <link rel="icon" href="/favicon.ico" />
 
         {/* Mengunduh font Google secara dinamis berdasarkan pilihan di Sanity */}
