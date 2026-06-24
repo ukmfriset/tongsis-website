@@ -30,7 +30,7 @@ export default function HeroOprec() {
 
         {/* Heading */}
         <h1 className="text-4xl md:text-7xl font-extrabold text-[#0D0D0D] leading-[1.15] md:leading-tight tracking-tighter max-w-3xl px-2 md:px-0">
-          Energimu Kebanyakan? Saluriin di Sini <br className="hidden md:inline" />
+          Punya Rasa Ingin Tahu Lebih? Mulai Dari Sini. <br className="hidden md:inline" />
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#F27405] via-[#e06600] to-[#A6691F] pb-1 block mt-2 md:mt-4 transition-transform duration-500 ease-out hover:scale-105 cursor-pointer inline-block">
             UKM-F RISET FISIB UTM
           </span>
@@ -38,7 +38,9 @@ export default function HeroOprec() {
 
         {/* Subtitle/Description */}
         <p className="max-w-xl text-sm md:text-lg leading-relaxed font-sans font-medium text-gray-600 px-2 md:px-0">
-           UKM-F Riset FISIB UTM buat kamu yang otaknya nggak bisa diem — yang suka nanya "kenapa?" lebih dari sekali, suka mikir kritis, dan pengin karyanya dilihat dunia (bukan cuma dosen).
+           Buat kamu yang suka bertanya, suka mencari tahu, dan percaya kalau ide kecil bisa berkembang jadi karya besar.
+           UKM-F Riset FISIB UTM hadir untuk mahasiswa yang ingin belajar riset, menulis, berdiskusi, dan menciptakan karya yang punya dampak.
+           Bukan cuma tentang hasil akhir, tapi tentang proses berkembang bersama orang-orang yang punya semangat yang sama.
         </p>
 
         {/* Action Buttons */}
@@ -47,13 +49,13 @@ export default function HeroOprec() {
             href="/daftar"
             className="w-full sm:w-auto text-center rounded-full bg-gradient-to-r from-[#F27405] to-[#A6691F] px-8 py-3.5 text-sm font-extrabold text-white shadow-lg shadow-[#F27405]/20 transition-all hover:scale-105 hover:shadow-[#F27405]/30"
           >
-            Gas, Daftar Sekarang →
+            Daftar Sekarang →
           </Link>
           <Link
             href="#tentang"
             className="w-full sm:w-auto text-center rounded-full bg-white px-8 py-3.5 text-sm font-extrabold text-[#0D0D0D]/80 border border-gray-200 shadow-sm transition-all hover:border-gray-300 hover:bg-gray-50"
           >
-            Scroll dulu, kenalan dulu ↓
+            Scroll dulu, kenalan lebih dekat ↓
           </Link>
         </div>
 

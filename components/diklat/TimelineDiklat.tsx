@@ -1,32 +1,72 @@
 "use client";
 
+import { useState, useEffect } from "react";
+import { client } from "../../src/sanity/client"; // Jalur relatif akurat andalanmu
+
+interface DiklatStep {
+  no: string;
+  judul: string;
+  tanggal: string;
+  deskripsi: string;
+  status: "aktif" | "akan-datang";
+  warna: "orange" | "brown";
+}
+
+// Data default bawaan asli kamu (Sistem Fallback)
+const defaultSteps: DiklatStep[] = [
+  {
+    no: "01",
+    judul: "Pendaftaran TONGSIS",
+    tanggal: "Akan Diumumkan",
+    deskripsi: "Peserta yang dinyatakan lolos open recruitment dapat melanjutkan dengan mengisi formulir pendaftaran TONGSIS.",
+    status: "aktif",
+    warna: "orange",
+  },
+  {
+    no: "02",
+    judul: "Pra Diklat",
+    tanggal: "Akan Diumumkan",
+    deskripsi: "Rangkaian kegiatan persiapan yang membantu peserta mengenal teknis dan agenda kegiatan sebelum diklat utama berlangsung.",
+    status: "akan-datang",
+    warna: "brown",
+  },
+  {
+    no: "03",
+    judul: "Diklat TONGSIS",
+    tanggal: "Akan Diumumkan",
+    deskripsi: "Kegiatan inti yang berisi pembekalan materi, pengembangan karakter, kegiatan kelompok, dan pelantikan anggota baru.",
+    status: "akan-datang",
+    warna: "brown",
+  },
+];
+
 export default function TimelineDiklat() {
-  const steps = [
-    {
-      no: "01",
-      judul: "Pendaftaran TONGSIS",
-      tanggal: "Akan Diumumkan",
-      deskripsi: "Kamu yang udah lolos open recruitment tinggal isi formulir pendaftaran TONGSIS. Simpel.",
-      status: "aktif",
-      warna: "orange",
-    },
-    {
-      no: "02",
-      judul: "Pra Diklat",
-      tanggal: "Akan Diumumkan",
-      deskripsi: "Serangkaian kegiatan persiapan sebelum diklat utama dimulai. Semacam pemanasan — biar kamu nggak kaget.",
-      status: "akan-datang",
-      warna: "brown",
-    },
-    {
-      no: "03",
-      judul: "Diklat TONGSIS",
-      tanggal: "Akan Diumumkan",
-      deskripsi: "Ini yang ditunggu-tunggu. Tiga hari intensif: pembekalan skill, outbound, dan pelantikan resmi sebagai anggota.",
-      status: "akan-datang",
-      warna: "brown",
-    },
-  ];
+  const [steps, setSteps] = useState<DiklatStep[]>(defaultSteps);
+
+  // Ambil data alur pendaftaran diklat dari Sanity secara real-time
+  useEffect(() => {
+    async function fetchDiklatTimeline() {
+      try {
+        // Diurutkan berdasarkan nomor urut (01, 02, dst) secara ascending
+        const query = `*[_type == "timelinediklat"] | order(no asc) {
+          no,
+          judul,
+          tanggal,
+          deskripsi,
+          status,
+          warna
+        }`;
+        const data = await client.fetch(query);
+        
+        if (data && data.length > 0) {
+          setSteps(data);
+        }
+      } catch (error) {
+        console.error("Gagal mengambil data timeline diklat dari Sanity:", error);
+      }
+    }
+    fetchDiklatTimeline();
+  }, []);
 
   return (
     <section className="py-24 px-4 bg-[#F2F2F2]">
@@ -37,10 +77,10 @@ export default function TimelineDiklat() {
             Tahapan
           </span>
           <h2 className="mt-4 text-4xl md:text-5xl font-extrabold text-[#0D0D0D] tracking-tight">
-            Tiga Tahap Sebelum Kamu Resmi Jadi Anggota
+            Tiga Tahap Menuju Keanggotaan Resmi
           </h2>
           <p className="mt-6 text-gray-600 max-w-xl mx-auto leading-relaxed font-medium">
-            Santai, nggak ribet. Ini prosesnya:
+            Berikut rangkaian kegiatan yang akan kamu ikuti sebelum resmi menjadi anggota UKM-F Riset.
           </p>
         </div>
 

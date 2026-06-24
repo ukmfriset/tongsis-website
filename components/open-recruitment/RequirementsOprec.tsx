@@ -1,23 +1,56 @@
 "use client";
 
+import { useState, useEffect } from "react";
+import { client } from "../../src/sanity/client"; // Jalur relatif akurat andalanmu
+
+interface SyaratItem {
+  judul: string;
+  detail: string;
+  warna: "orange" | "brown";
+}
+
+// Data default bawaan asli kamu (Sistem Fallback)
+const defaultSyarat: SyaratItem[] = [
+  { 
+    judul: "Mahasiswa Aktif FISIB UTM", 
+    detail: "Minimal semester 1 dan maksimal semester 5.",
+    warna: "orange"
+  },
+  { 
+    judul: "Mengikuti Akun Instagram Resmi UKM-F Riset", 
+    detail: "Untuk mendapatkan informasi dan pengumuman terbaru.",
+    warna: "brown"
+  },
+  { 
+    judul: "Mengisi Formulir Pendaftaran", 
+    detail: "Pastikan seluruh data yang diisi lengkap dan sesuai.",
+    warna: "orange"
+  },
+];
+
 export default function RequirementsOprec() {
-  const syarat = [
-    { 
-      judul: "Syarat 1: Mahasiswa aktif FISIB UTM", 
-      detail: "Minimal semester 1, maksimal semester 5.",
-      warna: "orange"
-    },
-    { 
-      judul: "Syarat 2: Follow akun Instagram resmi kami", 
-      detail: "Biar nggak ketinggalan info penting.",
-      warna: "brown"
-    },
-    { 
-      judul: "Syarat 3: Isi Formulir", 
-      detail: "Isi formulir pendaftaran dengan data yang lengkap dan jujur.",
-      warna: "orange"
-    },
-  ];
+  const [syarat, setSyarat] = useState<SyaratItem[]>(defaultSyarat);
+
+  // Ambil data persyaratan dari Sanity
+  useEffect(() => {
+    async function fetchRequirements() {
+      try {
+        const query = `*[_type == "requirement"] | order(_createdAt asc) {
+          judul,
+          detail,
+          warna
+        }`;
+        const data = await client.fetch(query);
+        
+        if (data && data.length > 0) {
+          setSyarat(data);
+        }
+      } catch (error) {
+        console.error("Gagal mengambil data persyaratan dari Sanity:", error);
+      }
+    }
+    fetchRequirements();
+  }, []);
 
   return (
     <section className="py-24 px-4 bg-[#F2F2F2]">
@@ -27,11 +60,11 @@ export default function RequirementsOprec() {
             Persyaratan Pendaftaran
           </span>
           <h2 className="mt-4 text-4xl md:text-5xl font-extrabold text-[#0D0D0D] tracking-tight">
-            Sebelum Daftar, Cek Dulu Ya
+            Pastikan Kamu Memenuhi Persyaratan Berikut
           </h2>
         </div>
 
-        {/* Grid menyamping dengan 3 kolom */}
+        {/* Grid fleksibel mengikuti jumlah data dari Sanity */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {syarat.map((item, i) => (
             <div 

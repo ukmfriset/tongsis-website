@@ -24,7 +24,8 @@ export default function ChoiceCardsHome() {
                 OPEN RECRUITMENT 2026
               </h2>
               <p className="text-sm text-gray-600 leading-relaxed mb-6">
-                Belum daftar? Ini titik awalmu. Isi formulir, kenalan sama keluarga besar UKM-F Riset, dan masuk ke lingkungan yang beneran ngedukung kamu tumbuh. Ini bukan sekadar daftar nama — ini awal dari sesuatu yang lebih besar.
+                Belum mengikuti proses pendaftaran?<br/>
+                Open Recruitment merupakan langkah awal untuk bergabung dengan UKM-F RISET FISIB UTM. Di sini kamu akan mengenal lebih dekat organisasi, kegiatan, serta berbagai kesempatan pengembangan diri yang tersedia.
               </p>
               <div className="inline-flex items-center gap-2 text-sm font-bold text-[#F27405] group-hover:gap-3 transition-all">
                 Daftar Sekarang
@@ -49,7 +50,9 @@ export default function ChoiceCardsHome() {
                 DIKLAT TONGSIS 2026
               </h2>
               <p className="text-sm text-gray-600 leading-relaxed mb-6">
-                Udah lolos seleksi? Nice, selamat! 🎉 Sekarang saatnya lanjut ke tahap berikutnya. Di sini ada semua info yang kamu butuhkan — jadwal, perlengkapan, sampai hal-hal penting yang perlu kamu tahu sebelum diklat dimulai.
+                Sudah dinyatakan lolos seleksi?<br/>
+                Selamat atas pencapaianmu. Tahap berikutnya adalah mengikuti TONGSIS 2026 sebagai bagian dari proses pembinaan anggota baru.
+                Pada halaman ini kamu dapat menemukan berbagai informasi penting mengenai jadwal kegiatan, perlengkapan yang perlu dipersiapkan, serta panduan pelaksanaan diklat.
               </p>
               <div className="inline-flex items-center gap-2 text-sm font-bold text-[#A6691F] group-hover:gap-3 transition-all">
                 Lihat Panduan

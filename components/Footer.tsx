@@ -1,6 +1,8 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import Image from "next/image";
+import { client } from "../src/sanity/client"; // Jalur relatif akurat sesuai struktur foldermu
 import {
   FaInstagram,
   FaTiktok,
@@ -20,6 +22,24 @@ const socialLinks = [
 ];
 
 export default function Footer() {
+  const [tahunPelaksanaan, setTahunPelaksanaan] = useState<string>("2026");
+
+  // Ambil data tahun pelaksanaan dari Sanity secara real-time
+  useEffect(() => {
+    async function fetchTahun() {
+      try {
+        const query = `*[_type == "siteSettings"][0]{ tahunPelaksanaan }`;
+        const data = await client.fetch(query);
+        if (data?.tahunPelaksanaan) {
+          setTahunPelaksanaan(data.tahunPelaksanaan);
+        }
+      } catch (error) {
+        console.error("Gagal mengambil data tahun untuk footer:", error);
+      }
+    }
+    fetchTahun();
+  }, []);
+
   return (
     <footer className="relative border-t border-gray-100 bg-white px-6 pt-20 pb-10 overflow-hidden">
       
@@ -42,7 +62,8 @@ export default function Footer() {
                 className="object-contain"
               />
             </div>
-            <h3 className="text-xl font-extrabold text-[#0D0D0D]">TONGSIS 2026</h3>
+            {/* REVISI DINAMIS: Menggunakan variabel tahunPelaksanaan dari Sanity */}
+            <h3 className="text-xl font-extrabold text-[#0D0D0D]">TONGSIS {tahunPelaksanaan}</h3>
             <p className="mt-4 text-sm leading-relaxed text-[#8C8C8C] max-w-xs font-medium">
               Training of Good Skill of People to Imagination and Smarter — 
               UKM-F RISET FISIB UTM.
@@ -78,10 +99,11 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Copyright */}
+        {/* Copyright Section */}
         <div className="mt-8 text-center">
-          <p className="text-xs font-bold text-[#0D0D0D]/80 uppercase tracking-wider">
-            © {new Date().getFullYear()} TONGSIS • Departemen Komunikasi dan Informasi • UKM-F Riset FISIB UTM
+          <p className="text-xs font-bold text-gray-400 uppercase tracking-wider">
+            {/* REVISI DINAMIS: Tahun dinamis diselaraskan ke dalam teks copyright */}
+            TONGSIS © {tahunPelaksanaan} All Rights Reserved • Departemen Informasi dan Komunikasi • UKM-F Riset FISIB UTM
           </p>
         </div>
       </div>

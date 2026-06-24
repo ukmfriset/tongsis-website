@@ -11,12 +11,12 @@ export default function AboutOprec() {
             Kenalan Dulu
           </span>
           <h2 className="mt-4 text-4xl md:text-5xl font-extrabold text-[#0D0D0D] tracking-tight">
-            Wait, UKM-F Riset itu apa sih?
+            Sebenarnya UKM-F Riset Itu Apa?
           </h2>
           <p className="mt-6 text-gray-600 max-w-2xl mx-auto text-lg leading-relaxed font-medium">
-            Bukan organisasi kampus yang kegiatannya cuma rapat doang. 
-            UKM-F Riset FISIB UTM adalah komunitas mahasiswa yang genuinely suka riset, nulis, dan bikin karya yang punya dampak nyata. 
-            Di sini kamu bakal nemu circle yang frekuensinya sama — sama-sama penasaran, sama-sama mau tumbuh, sama-sama capek jadi mahasiswa yang cuma kuliah-pulang-kuliah-pulang.
+            UKM-F Riset FISIB UTM adalah wadah bagi mahasiswa yang tertarik dengan dunia penelitian, penulisan, dan pengembangan ide.
+            Di sini kamu nggak harus sudah jago riset dari awal. Kamu bisa mulai dari belajar dasar, bertukar gagasan, sampai menghasilkan karya yang bisa dibanggakan.
+            Karena menjadi mahasiswa bukan cuma soal menyelesaikan tugas kuliah — tapi juga tentang bagaimana kamu membangun cara berpikir, pengalaman, dan kontribusi.
           </p>
         </div>
 
@@ -25,19 +25,19 @@ export default function AboutOprec() {
           <span className="text-xs font-bold tracking-[0.2em] text-[#A6691F] uppercase">
             Nilai-nilai Inti
           </span>
-          <h3 className="mt-2 text-3xl font-extrabold text-[#0D0D0D]">Hidup di UKM-F Riset?<br/>Ada satu kode: #ADIK</h3>
+          <h3 className="mt-2 text-3xl font-extrabold text-[#0D0D0D]">Hidup di UKM-F Riset, Berjalan Dengan Prinsip #ADIK</h3>
           <p className="mt-6 text-gray-600 max-w-2xl mx-auto text-lg leading-relaxed font-medium">
-            Ini bukan slogan asal tempel. Ini cara kita exist bareng.
+            Bukan sekadar nama, tapi nilai yang kita bawa dalam setiap proses.
           </p>
         </div>
 
         {/* Card Grid #ADIK */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 mb-20">
           {[
-            { huruf: "A", judul: "Adaptif", warna: "orange", deskripsi: "Dunia berubah cepet. Kita lebih cepet." },
-            { huruf: "D", judul: "Dedikatif", warna: "brown", deskripsi: "Kalau udah commit, kita jalanin sampai kelar. No setengah-setengah." },
-            { huruf: "I", judul: "Inklusif", warna: "orange", deskripsi: "Semua suara didengar. Nggak ada yang terlalu 'baru' buat punya pendapat. " },
-            { huruf: "K", judul: "Kreatif", warna: "brown", deskripsi: "Dari ide receh jadi karya, dari karya jadi prestasi. Itu vibe kita." },
+            { huruf: "A", judul: "Adaptif", warna: "orange", deskripsi: "Mampu mengikuti perubahan dan terus berkembang menghadapi tantangan baru." },
+            { huruf: "D", judul: "Dedikatif", warna: "brown", deskripsi: "Berkomitmen dalam proses dan bertanggung jawab terhadap setiap langkah yang dijalani." },
+            { huruf: "I", judul: "Inklusif", warna: "orange", deskripsi: "Membuka ruang bagi setiap ide, pendapat, dan latar belakang untuk berkembang bersama." },
+            { huruf: "K", judul: "Kreatif", warna: "brown", deskripsi: "Mengubah rasa ingin tahu menjadi ide, dan ide menjadi karya nyata." },
           ].map((item) => (
             <div
               key={item.huruf}

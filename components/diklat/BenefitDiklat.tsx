@@ -6,43 +6,43 @@ export default function BenefitDiklat() {
       no: "01", 
       icon: "📚", 
       warna: "orange", 
-      judul: "Materi Kepenulisan & Riset", 
-      deskripsi: "Dasar-dasar riset, kepenulisan ilmiah, penalaran, dan metodologi — disampein dengan cara yang masuk akal, bukan ceramah satu arah." 
+      judul: "Materi Kepenulisan dan Riset", 
+      deskripsi: "Pengenalan dasar penelitian, kepenulisan ilmiah, penalaran, dan metodologi penelitian." 
     },
     { 
       no: "02", 
       icon: "🎤", 
       warna: "brown", 
-      judul: "Public Speaking", 
-      deskripsi: "Latihan komunikasi dan presentasi yang berguna nggak cuma di organisasi, tapi juga buat kehidupan akademik dan karir ke depannya." 
+      judul: "Pengembangan Kemampuan Public Speaking", 
+      deskripsi: "Melatih kemampuan menyampaikan gagasan, berdiskusi, dan melakukan presentasi." 
     },
     { 
       no: "03", 
       icon: "🏕️", 
       warna: "orange", 
-      judul: "Outbound & Team Building", 
-      deskripsi: "Aktivitas kelompok yang bikin kamu sadar: hal-hal besar emang nggak bisa diselesaikan sendirian." 
+      judul: "Outbound dan Team Building", 
+      deskripsi: "Kegiatan yang membantu peserta membangun kerja sama, komunikasi, dan solidaritas." 
     },
     { 
       no: "04", 
       icon: "🤝", 
       warna: "brown", 
-      judul: "Relasi Baru yang Solid", 
-      deskripsi: "Kamu bakal kenal orang-orang yang frekuensinya sama. Dan dari sini, circle itu mulai terbentuk." 
+      judul: "Relasi Baru", 
+      deskripsi: "Kesempatan untuk mengenal teman-teman baru yang memiliki semangat belajar dan berkembang bersama." 
     },
     { 
       no: "05", 
       icon: "🌱", 
       warna: "orange", 
-      judul: "Karakter #ADIK", 
-      deskripsi: "Adaptif, Dedikatif, Inklusif, Kreatif — bukan dihafal, tapi dihidupin selama tiga hari bareng." 
+      judul: "Penerapan Nilai #ADIK", 
+      deskripsi: "Memahami dan menghidupkan nilai Adaptif, Dedikatif, Inklusif, dan Kreatif dalam setiap kegiatan." 
     },
     { 
       no: "06", 
       icon: "📜", // PERBAIKAN: Mengembalikan properti icon ke emoji semula
       warna: "brown", // PERBAIKAN: Mengembalikan properti warna yang sempat hilang
       judul: "Sertifikat Resmi", 
-      deskripsi: "Bukti keikutsertaanmu. Nilai tambah yang nggak ada ruginya buat portofolio." 
+      deskripsi: "Sertifikat keikutsertaan sebagai bentuk apresiasi atas partisipasi peserta." 
     },
   ];
 
@@ -55,10 +55,10 @@ export default function BenefitDiklat() {
             Yang Kamu Dapat
           </span>
           <h2 className="mt-4 text-4xl md:text-5xl font-extrabold text-[#0D0D0D] tracking-tight">
-            Ini yang Kamu Bawa Pulang dari TONGSIS
+            Yang Akan Kamu Dapatkan
           </h2>
           <p className="mt-6 text-gray-600 max-w-2xl mx-auto text-lg leading-relaxed font-medium">
-            Berbagai materi, pengalaman, dan fasilitas yang mendukung proses pembelajaranmu selama mengikuti TONGSIS.
+            Bekal Untuk Perjalanan Selanjutnya.
           </p>
         </div>
 

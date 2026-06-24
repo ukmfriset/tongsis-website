@@ -1,16 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap');
 @import "tailwindcss";
 
 :root {
   /* Palet Warna Baru UKMF Riset & FISIB */
-  --background: #F2F2F2;       /* Off-White dari palet */
-  --foreground: #0D0D0D;       /* Black/Charcoal pekat untuk teks utama */
-  --muted: #8C8C8C;            /* Grey untuk teks sekunder/caption */
-  --border: #E5E7EB;           /* Border abu-abu halus standar */
-  --bg-secondary: #FFFFFF;     /* Putih bersih untuk background kartu/konten */
+  --background: #F2F2F2;       
+  --foreground: #0D0D0D;       
+  --muted: #8C8C8C;            
+  --border: #E5E7EB;           
+  --bg-secondary: #FFFFFF;     
   
   /* Gradasi Utama */
-  --accent-from: #F27405;      /* Orange khas FISIB */
-  --accent-to: #A6691F;        /* Cokelat Emas identitas Riset */
+  --accent-from: #F27405;      
+  --accent-to: #A6691F;        
 }
 
 @theme inline {
@@ -20,21 +21,28 @@
   --color-border: var(--border);
   --color-bg-secondary: var(--bg-secondary);
   
-  /* Akses cepat untuk variabel gradasi baru di utility class Tailwind */
   --color-accent-from: var(--accent-from);
   --color-accent-to: var(--accent-to);
   
-  /* Konfigurasi Font */
-  --font-sans: var(--font-inter);
-  --font-heading: var(--font-space);
+  /* Daftarkan font ke utilitas Tailwind v4 */
+  --font-sans: 'Inter', sans-serif;
+  --font-heading: 'Space Grotesk', sans-serif;
 }
 
+/* ==========================================
+   PERBAIKAN MUTLAK: HANYA KUNCI FONT & WARNA UTAMA BODY
+   ========================================== */
 body {
-  background: var(--background);
+  background-color: var(--background);
   color: var(--foreground);
-  font-family: var(--font-sans);
+  font-family: 'Inter', sans-serif !important;
 }
 
-h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-heading);
+/* Kunci font tanpa merusak warna, background-color, atau gradasi elemen */
+p, a, span, li, button, input, textarea {
+  font-family: 'Inter', sans-serif !important;
+}
+
+h1, h2, h3, h4, h5, h6, .font-heading {
+  font-family: 'Space Grotesk', sans-serif !important;
 }

@@ -1,14 +1,52 @@
 "use client";
 
+import { useState, useEffect } from "react";
+import { client } from "../../src/sanity/client"; // Jalur relatif akurat andalanmu
+
+// Interface tipe data untuk TypeScript
+interface AchievementItem {
+  nama: string;
+  prodi: string;
+  prestasi: string;
+  level: "Nasional" | "Regional";
+}
+
+// Data default bawaan asli kamu (Sistem Fallback)
+const defaultAchievements: AchievementItem[] = [
+  { nama: "Nama Anggota 1", prodi: "Ilmu Komunikasi • 2022", prestasi: "Juara 1 LKTI Nasional Bidang Sosial", level: "Nasional" },
+  { nama: "Nama Anggota 2", prodi: "Sosiologi • 2021", prestasi: "Juara 2 Essay Competition Tingkat Regional", level: "Regional" },
+  { nama: "Nama Anggota 3", prodi: "Sastra Inggris • 2022", prestasi: "Lolos PKM-RE Pendanaan Kemendikbud", level: "Nasional" },
+  { nama: "Nama Anggota 4", prodi: "Psikologi • 2023", prestasi: "Juara 3 LKTI Regional Jawa Timur", level: "Regional" },
+  { nama: "Nama Anggota 5", prodi: "Ilmu Komunikasi • 2021", prestasi: "Best Paper Conference Ilmiah Nasional", level: "Nasional" },
+  { nama: "Nama Anggota 6", prodi: "Sosiologi • 2022", prestasi: "Finalis PKM-K Pekan Ilmiah Mahasiswa", level: "Nasional" },
+];
+
 export default function AchievementsOprec() {
-  const achievements = [
-    { nama: "Nama Anggota 1", prodi: "Ilmu Komunikasi • 2022", prestasi: "Juara 1 LKTI Nasional Bidang Sosial", level: "Nasional" },
-    { nama: "Nama Anggota 2", prodi: "Sosiologi • 2021", prestasi: "Juara 2 Essay Competition Tingkat Regional", level: "Regional" },
-    { nama: "Nama Anggota 3", prodi: "Sastra Inggris • 2022", prestasi: "Lolos PKM-RE Pendanaan Kemendikbud", level: "Nasional" },
-    { nama: "Nama Anggota 4", prodi: "Psikologi • 2023", prestasi: "Juara 3 LKTI Regional Jawa Timur", level: "Regional" },
-    { nama: "Nama Anggota 5", prodi: "Ilmu Komunikasi • 2021", prestasi: "Best Paper Conference Ilmiah Nasional", level: "Nasional" },
-    { nama: "Nama Anggota 6", prodi: "Sosiologi • 2022", prestasi: "Finalis PKM-K Pekan Ilmiah Mahasiswa", level: "Nasional" },
-  ];
+  const [achievements, setAchievements] = useState<AchievementItem[]>(defaultAchievements);
+
+  // Ambil data prestasi dari Sanity
+  useEffect(() => {
+    async function fetchAchievements() {
+      try {
+        // Mengambil semua data dengan dokumen tipe 'achievement'
+        const query = `*[_type == "achievement"] | order(_createdAt desc) {
+          nama,
+          prodi,
+          prestasi,
+          level
+        }`;
+        const data = await client.fetch(query);
+        
+        // Jika di Sanity ada isinya, pakai data Sanity. Jika kosong, pertahankan default.
+        if (data && data.length > 0) {
+          setAchievements(data);
+        }
+      } catch (error) {
+        console.error("Gagal mengambil data prestasi dari Sanity:", error);
+      }
+    }
+    fetchAchievements();
+  }, []);
 
   const levelIcon: Record<string, string> = { Nasional: "🏆", Regional: "🥈" };
 
@@ -21,10 +59,10 @@ export default function AchievementsOprec() {
             Bukti Nyata
           </span>
           <h2 className="mt-4 text-4xl md:text-5xl font-extrabold text-[#0D0D0D] tracking-tight">
-            Bukan Omong Doang<br/>Ini Buktinya
+            Bukan Sekadar Rencana, Ini Hasilnya
           </h2>
           <p className="mt-6 text-gray-600 max-w-2xl mx-auto text-lg leading-relaxed font-medium">
-            Anggota UKM-F Riset udah buktiin — karya mereka diakui sampai tingkat nasional.
+            Anggota UKM-F Riset telah menghasilkan berbagai karya dan pencapaian di tingkat regional hingga nasional.
           </p>
         </div>
 
@@ -51,7 +89,7 @@ export default function AchievementsOprec() {
                     : "border-[#A6691F]/20 group-hover:border-[#A6691F] group-hover:shadow-md group-hover:shadow-[#A6691F]/10"
                   }`}
                 >
-                  {levelIcon[item.level]}
+                  {levelIcon[item.level] || "🏆"}
                 </div>
 
                 {/* Badge Keterangan Level */}

@@ -1,29 +1,67 @@
 "use client";
 
+import { useState, useEffect } from "react";
+import { client } from "../../src/sanity/client"; // Jalur relatif akurat andalanmu
+
+interface TimelineStep {
+  no: string;
+  judul: string;
+  tanggal: string;
+  deskripsi: string;
+  warna: "orange" | "brown";
+}
+
+// Data default bawaan asli kamu (Sistem Fallback)
+const defaultSteps: TimelineStep[] = [
+  { no: "01", judul: "Pendaftaran", tanggal: "Akan Diumumkan", deskripsi: "Isi formulir pendaftaran secara online sesuai petunjuk yang tersedia.", warna: "orange" },
+  { no: "02", judul: "Test Tulis", tanggal: "Akan Diumumkan", deskripsi: "Tes penalaran dan kemampuan kepenulisan untuk melihat cara berpikir dan kemampuan menyampaikan gagasan.", warna: "brown" },
+  { no: "03", judul: "Wawancara", tanggal: "Akan Diumumkan", deskripsi: "Sesi diskusi untuk mengenal motivasi, minat, dan komitmen calon anggota.", warna: "orange" },
+  { no: "04", judul: "Pengumuman", tanggal: "Akan Diumumkan", deskripsi: "Hasil seleksi akan diumumkan sesuai jadwal yang telah ditentukan.", warna: "brown" },
+  { no: "05", judul: "Pendaftaran TONGSIS", tanggal: "Akan Diumumkan", deskripsi: "Peserta yang dinyatakan lolos dapat melanjutkan ke tahap berikutnya.", warna: "orange" },
+  { no: "06", judul: "Pra Diklat", tanggal: "Akan Diumumkan", deskripsi: "Rangkaian kegiatan persiapan sebelum pelaksanaan Diklat TONGSIS.", warna: "brown" },
+  { no: "07", judul: "Diklat TONGSIS", tanggal: "Akan Diumumkan", deskripsi: "Tahap pembinaan dan pengembangan kapasitas anggota baru.", warna: "orange" },
+  { no: "08", judul: "Resmi Jadi Anggota", tanggal: "Akan Diumumkan", deskripsi: "Selamat datang di UKM-F Riset FISIB UTM.", warna: "brown" },
+];
+
 export default function TimelineOprec() {
-  const steps = [
-    { no: "01", judul: "Pendaftaran", tanggal: "Akan Diumumkan", deskripsi: "Isi formulir online. Simpel, nggak perlu lampiran aneh-aneh dulu.", warna: "orange" },
-    { no: "02", judul: "Test Tulis", tanggal: "Akan Diumumkan", deskripsi: "Tes penalaran dan kemampuan kepenulisan. Bukan ujian hafalan — ini soal cara kamu berpikir.", warna: "brown" },
-    { no: "03", judul: "Wawancara", tanggal: "Akan Diumumkan", deskripsi: "Ngobrol santai soal motivasi dan minat kamu. Bukan interogasi, promise.", warna: "orange" },
-    { no: "04", judul: "Pengumuman", tanggal: "Akan Diumumkan", deskripsi: "Saatnya cek notif. Siapa yang lolos, siapa yang lanjut ke tahap berikutnya.", warna: "brown" },
-    { no: "05", judul: "Pendaftaran TONGSIS", tanggal: "Akan Diumumkan", deskripsi: "Kamu yang lolos bisa langsung daftar Diklat TONGSIS 2026.", warna: "orange" },
-    { no: "06", judul: "Pra Diklat", tanggal: "Akan Diumumkan", deskripsi: "Serangkaian kegiatan persiapan sebelum diklat dimulai.", warna: "brown" },
-    { no: "07", judul: "Diklat TONGSIS", tanggal: "Akan Diumumkan", deskripsi: "Diklat intensif. Ini momen yang bakal kamu ceritain ke orang-orang.", warna: "orange" },
-    { no: "08", judul: "Resmi Jadi Anggota", tanggal: "Akan Diumumkan", deskripsi: "Welcome to the family. Ini baru awal dari segalanya.", warna: "brown" },
-  ];
+  const [steps, setSteps] = useState<TimelineStep[]>(defaultSteps);
+
+  // Ambil data alur timeline dari Sanity
+  useEffect(() => {
+    async function fetchTimeline() {
+      try {
+        // Mengurutkan berdasarkan nomor langkah agar urutannya presisi (01, 02, dst)
+        const query = `*[_type == "timeline"] | order(no asc) {
+          no,
+          judul,
+          tanggal,
+          deskripsi,
+          warna
+        }`;
+        const data = await client.fetch(query);
+        
+        if (data && data.length > 0) {
+          setSteps(data);
+        }
+      } catch (error) {
+        console.error("Gagal mengambil data timeline dari Sanity:", error);
+      }
+    }
+    fetchTimeline();
+  }, []);
 
   return (
     <section className="py-24 px-4 bg-[#F2F2F2]">
       <div className="mx-auto max-w-7xl">
         <div className="text-center mb-16">
           <span className="text-xs font-bold tracking-[0.2em] text-[#F27405] uppercase">Tahapan Seleksi</span>
-          <h2 className="mt-4 text-4xl md:text-5xl font-extrabold text-[#0D0D0D] tracking-tight">Tahapan Open Recruitment 2026</h2>
+          <h2 className="mt-4 text-4xl md:text-5xl font-extrabold text-[#0D0D0D] tracking-tight">Alur Open Recruitment 2026</h2>
           <p className="mt-6 text-gray-600 max-w-2xl mx-auto text-lg leading-relaxed font-medium">
-            Nggak ribet. Prosesnya transparan, kamu tahu apa yang harus disiapkan.
+            Proses seleksi dirancang untuk membantu kami mengenal calon anggota lebih dekat. Setiap tahap akan diumumkan secara terbuka dan transparan.
           </p>
         </div>
 
-        {/* Grid Grid Layout */}
+        {/* Grid Layout Fleksibel */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {steps.map((step) => (
             <div 

@@ -24,7 +24,7 @@ export default function HeroHome() {
 
         {/* 2. Heading Hitam Sambutan */}
         <h2 className="text-xl md:text-3xl font-extrabold text-[#0D0D0D] tracking-tight pt-2 animate-fade-in">
-          Selamat Datang, Calon Anggota Baru
+          Selamat Datang, Calon Anggota Baru 👋
         </h2>
 
         {/* 3. Title Utama Gradasi */}
@@ -41,14 +41,14 @@ export default function HeroHome() {
 
         {/* Description */}
         <p className="pt-2 text-[#0D0D0D] max-w-2xl text-sm md:text-lg leading-relaxed font-sans font-medium px-2 md:px-0">
-          Riset itu bukan cuma tugas kuliah yang dikumpulin terus dilupain. Di <span className="font-extrabold text-[#F27405]">UKM-F RISET FISIB UTM</span>, 
-          riset adalah cara kita ngerti dunia — dan ngerti diri sendiri. TONGSIS 2026 adalah pintu masukmu ke komunitas ini.
-          Pengalaman belajar, eksplorasi, dan pengembangan diri yang nggak bakal kamu temuin di tempat lain. Tinggal pilih langkah pertamamu di bawah.
+          Riset bukan sekadar tugas yang selesai dikerjakan lalu dilupakan. Riset adalah proses memahami persoalan, menemukan gagasan, dan menghasilkan solusi yang bermanfaat.
+          Melalui <span className="font-extrabold text-[#F27405]">UKM-F RISET FISIB UTM</span>, mahasiswa memiliki ruang untuk belajar, berdiskusi, berkarya, dan berkembang bersama.
+          TONGSIS 2026 menjadi langkah awal untuk mengenal lebih dekat nilai, budaya, dan perjalanan di UKM-F RISET FISIB UTM.
         </p>
 
         {/* Scroll/Divider Indicator */}
         <div className="pt-4 md:pt-6 flex flex-col items-center gap-3 text-gray-400">
-          <span className="text-[10px] font-bold font-sans text-gray-500 uppercase tracking-widest px-4">🔍 Kamu ada di tahap mana sekarang?</span>
+          <span className="text-[10px] font-bold font-sans text-gray-500 uppercase tracking-widest px-4">🔍 Kamu berada di tahap yang mana?</span>
           <div className="h-8 md:h-10 w-px bg-gradient-to-b from-gray-300 to-transparent"></div>
         </div>
 

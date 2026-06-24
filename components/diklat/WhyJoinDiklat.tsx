@@ -5,26 +5,26 @@ export default function WhyJoinDiklat() {
     {
       no: "01",
       warna: "orange",
-      judul: " Pintu Resmi Jadi Anggota",
-      deskripsi: "TONGSIS adalah tahapan yang harus kamu lewatin sebelum resmi jadi bagian UKM-F Riset. Nggak ada shortcut, tapi percaya deh, prosesnya yang bikin it meaningful.",
+      judul: "Gerbang Menjadi Anggota UKM-F Riset",
+      deskripsi: "TONGSIS merupakan bagian dari proses yang perlu diikuti untuk menjadi anggota resmi UKM-F Riset FISIB UTM.",
     },
     {
       no: "02",
       warna: "brown",
-      judul: "Belajar yang Terarah",
-      deskripsi: "Setiap sesi dirancang dengan tujuan — dari dasar riset, cara kerja organisasi, sampai nilai-nilai #ADIK yang jadi DNA kita.",
+      judul: "Pembelajaran Yang Terstruktur",
+      deskripsi: "Materi yang diberikan dirancang untuk membantu peserta memahami dasar-dasar riset, organisasi, dan nilai-nilai yang dijunjung UKM-F Riset.",
     },
     {
       no: "03",
       warna: "orange",
-      judul: "Kenal Lebih Dekat",
-      deskripsi: "Ngobrol langsung sama pengurus, anggota aktif, dan sesama calon anggota baru. Ini tempat terbentuknya persahabatan yang beneran.",
+      judul: "Mengenal Organisasi Lebih Dekat",
+      deskripsi: "Peserta akan berinteraksi langsung dengan pengurus, anggota aktif, serta sesama anggota baru dalam berbagai kegiatan.",
     },
     {
       no: "04",
       warna: "brown",
-      judul: "Pengalaman yang Nggak Terlupakan",
-      deskripsi: "Dinamika kelompok, diskusi, outbound — semua dirancang buat bikin kamu tumbuh. Dan ya, bakal jadi cerita yang sering kamu inget.",
+      judul: "Pengalaman Yang Berkesan",
+      deskripsi: "Berbagai aktivitas selama TONGSIS dirancang untuk membangun kerja sama, kepercayaan diri, dan pengalaman yang akan terus dikenang.",
     },
   ];
 
@@ -38,10 +38,10 @@ export default function WhyJoinDiklat() {
             Alasan Ikut
           </span>
           <h2 className="mt-4 text-4xl md:text-5xl font-extrabold text-[#0D0D0D] tracking-tight">
-            Wajib Nih? Emang Worthit?
+            Mengapa TONGSIS Penting?
           </h2>
           <p className="mt-6 text-gray-600 max-w-2xl mx-auto text-lg leading-relaxed font-medium">
-            Ya wajib — tapi bukan karena formalitas. Ini alasannya kenapa kamu bakal glad you did it:
+            Lebih Dari Sekadar Tahapan Keanggotaan
           </p>
         </div>
 

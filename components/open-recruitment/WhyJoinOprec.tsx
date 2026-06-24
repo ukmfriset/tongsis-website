@@ -6,43 +6,43 @@ export default function WhyJoinOprec() {
       no: "01", 
       icon: "🌱", 
       warna: "orange", 
-      judul: "Belajar Riset dari Nol", 
-      deskripsi: "Belum pernah nulis karya ilmiah? Perfect. Kita mulai dari dasar bareng — metodologi, penulisan, sampai presentasi di depan juri. Zero judgment." 
+      judul: "Belajar Riset Dari Awal", 
+      deskripsi: "Belum pernah membuat karya ilmiah? Tidak masalah. Kamu akan belajar mulai dari dasar: mencari ide, menyusun penelitian, menulis, hingga mempresentasikan karya." 
     },
     { 
       no: "02", 
       icon: "🏆", 
       warna: "brown", 
-      judul: "Kesempatan Prestasi", 
+      judul: "Peluang Mengembangkan Prestasi", 
       deskripsi: "LKTI, PKM, essay competition — kita ikut semua, dan selalu ada senior + pembina yang siap nemenin prosesnya." 
     },
     { 
       no: "03", 
       icon: "🌐", 
       warna: "orange", 
-      judul: "Relasi yang Beneran", 
-      deskripsi: "Bukan sekadar 'kenalan kampus'. Tapi koneksi sama alumni yang udah berkarier, yang bisa jadi mentor — bahkan pintu karir — kamu ke depannya." 
+      judul: "Relasi Yang Berkembang", 
+      deskripsi: "Bangun koneksi dengan teman seperjuangan, senior, alumni, dan orang-orang yang bisa membuka perspektif baru untuk masa depanmu." 
     },
     { 
       no: "04", 
       icon: "🧡", 
       warna: "brown", 
-      judul: "Lingkungan yang Aman", 
-      deskripsi: "Nggak ada pertanyaan bodoh. Nggak ada yang dihakimin. Di sini kita tumbuh bareng, bukan kompetisi sendiri-sendiri." 
+      judul: "Lingkungan Untuk Bertumbuh", 
+      deskripsi: "Tempat untuk bertanya, mencoba, dan belajar tanpa takut salah. Karena setiap proses punya cerita." 
     },
     { 
       no: "05", 
       icon: "🧭", 
       warna: "orange", 
-      judul: "Pengalaman Organisasi Real", 
-      deskripsi: "Leadership, kerja tim, manajemen program — bukan dari buku teori, tapi dari ngelakuin langsung." 
+      judul: "Pengalaman Organisasi Nyata", 
+      deskripsi: "Belajar mengelola program, bekerja dalam tim, mengambil keputusan, dan mengembangkan kemampuan kepemimpinan." 
     },
     { 
       no: "06", 
       icon: "📂", 
       warna: "brown", 
-      judul: "Portofolio + Sertifikat Resmi", 
-      deskripsi: "Setiap kompetisi, publikasi, dan kepanitiaan dapet sertifikat. CV-mu bakal beda dari yang lain." 
+      judul: "Portofolio Untuk Masa Depan", 
+      deskripsi: "Setiap pengalaman, karya, dan kegiatan bisa menjadi bagian dari perjalanan akademik serta profesional kamu." 
     },
   ];
 
@@ -55,10 +55,10 @@ export default function WhyJoinOprec() {
             Kenapa Harus Gabung?
           </span>
           <h2 className="mt-4 text-4xl md:text-5xl font-extrabold text-[#0D0D0D] tracking-tight">
-            Masih Nanya<br/>"Emang Worth It?"
+            Apakah Ini Worth It?
           </h2>
           <p className="mt-6 text-gray-600 max-w-2xl mx-auto text-lg leading-relaxed font-medium">
-            iya. Dan ini alasannya.
+            Bukan cuma tentang organisasi. Ini tentang pengalaman yang bisa kamu bawa setelah lulus.
           </p>
         </div>
 

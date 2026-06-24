@@ -26,15 +26,15 @@ export default function HeroDiklat() {
 
         {/* Heading — PERBAIKAN: Menghapus properti inline-block yang duplikat */}
         <h1 className="text-4xl md:text-7xl font-extrabold text-[#0D0D0D] leading-[1.15] md:leading-[1.1] tracking-tighter max-w-3xl px-2 md:px-0">
-          Selamat, Kamu Lolos!🎉 <br />
+          Selamat, Kamu Lolos!🎉<br />
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#F27405] to-[#A6691F] pb-1 block mt-2 transition-transform duration-500 ease-out hover:scale-105 cursor-pointer">
-            Satu Langkah Lagi
-          </span> Bagian Keluarga Kita
+            Saatnya Melangkah
+          </span> ke Tahap Berikutnya
         </h1>
 
         {/* Description */}
         <p className="max-w-xl text-sm md:text-lg leading-relaxed font-sans font-medium text-gray-600 px-2 md:px-0">
-          Seleksinya udah kelar, dan kamu ada di sini. Sekarang saatnya ikut <strong className="text-[#0D0D0D] font-extrabold">TONGSIS 2026</strong> — Diklat Anggota Baru UKM-F Riset FISIB UTM yang bakal jadi awal dari perjalanan risetmu yang sesungguhnya.
+          TONGSIS 2026 menjadi awal perjalananmu bersama UKM-F Riset melalui berbagai pengalaman belajar, pengembangan diri, dan kebersamaan.
         </p>
 
         {/* Action Buttons */}

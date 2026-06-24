@@ -4,10 +4,10 @@ import Link from "next/link";
 
 export default function WorksOprec() {
   const categories = [
-    { icon: "📰", warna: "orange", judul: "Artikel", deskripsi: "Tulisan ilmiah populer seputar isu sosial dan akademik — dari anggota, untuk publik.", href: "https://www.ukmfriset.or.id/category/artikel" },
-    { icon: "📖", warna: "brown", judul: "Cerpen", deskripsi: "Cerita pendek dari sudut pandang mahasiswa yang mikir lebih dalam dari rata-rata.", href: "https://www.ukmfriset.or.id/category/cerpen" },
-    { icon: "📝", warna: "orange", judul: "Essay", deskripsi: "Esai kritis yang nggak takut punya opini. Berani, berargumen, berdampak.", href: "https://www.ukmfriset.or.id/category/essay" },
-    { icon: "✒️", warna: "brown", judul: "Puisi", deskripsi: "Ekspresi yang nggak bisa masuk jurnal tapi tetap penting untuk exist.", href: "https://www.ukmfriset.or.id/category/puisi" },
+    { icon: "📰", warna: "orange", judul: "Artikel", deskripsi: "Tulisan yang membahas berbagai isu sosial dan akademik dengan sudut pandang mahasiswa.", href: "https://www.ukmfriset.or.id/category/artikel" },
+    { icon: "📖", warna: "brown", judul: "Cerpen", deskripsi: "Cerita yang lahir dari ide, pengalaman, dan cara pandang mahasiswa.", href: "https://www.ukmfriset.or.id/category/cerpen" },
+    { icon: "📝", warna: "orange", judul: "Essay", deskripsi: "Tulisan kritis yang menyampaikan gagasan, argumen, dan perspektif baru.", href: "https://www.ukmfriset.or.id/category/essay" },
+    { icon: "✒️", warna: "brown", judul: "Puisi", deskripsi: "ERuang untuk mengekspresikan ide dan perasaan melalui kata-kata.", href: "https://www.ukmfriset.or.id/category/puisi" },
   ];
 
   return (
@@ -19,10 +19,10 @@ export default function WorksOprec() {
             Hasil Karya
           </span>
           <h2 className="mt-4 text-4xl md:text-5xl font-extrabold text-[#0D0D0D] tracking-tight">
-            Yang Kita Hasilin?<br/> Bukan Sekadar Tugas Kuliah
+            Apa Yang Kita Hasilkan?<br/>Bukan hanya tugas kuliah
           </h2>
           <p className="mt-6 text-gray-600 max-w-2xl mx-auto text-lg leading-relaxed font-medium">
-            Anggota UKM-F Riset aktif produksi karya nyata — artikel ilmiah, esai, cerpen, sampai puisi. Semua bisa kamu baca di website resmi kami.
+            Anggota UKM-F Riset aktif menciptakan karya berupa tulisan ilmiah, esai, cerita, hingga karya kreatif lainnya.
           </p>
         </div>
 

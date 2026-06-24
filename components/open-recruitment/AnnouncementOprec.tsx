@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { client } from "../../src/sanity/client"; // Jalur relatif akurat andalanmu
 
 type OprecStatus = "upcoming" | "open" | "passed";
 
@@ -16,8 +17,28 @@ interface StatusDetail {
 }
 
 export default function AnnouncementOprec() {
-  // Ubah status di sini untuk testing ("upcoming" | "open" | "passed")
-  const status = "upcoming" as OprecStatus;
+  // State dinamis untuk menampung status dan link dari Sanity
+  const [currentStatus, setCurrentStatus] = useState<OprecStatus>("upcoming");
+  const [externalLink, setExternalLink] = useState<string | null>(null);
+
+  // Ambil data pengaturan pengumuman dari Sanity
+  useEffect(() => {
+    async function fetchAnnouncementSettings() {
+      try {
+        // Ambil data dokumen pertama bertipe 'announcement'
+        const query = `*[_type == "announcement"][0]{ status, linkPengumuman }`;
+        const data = await client.fetch(query);
+        
+        if (data) {
+          if (data.status) setCurrentStatus(data.status as OprecStatus);
+          if (data.linkPengumuman) setExternalLink(data.linkPengumuman);
+        }
+      } catch (error) {
+        console.error("Gagal mengambil data pengumuman dari Sanity:", error);
+      }
+    }
+    fetchAnnouncementSettings();
+  }, []);
 
   const statusConfig: Record<OprecStatus, StatusDetail> = {
     upcoming: {
@@ -26,7 +47,7 @@ export default function AnnouncementOprec() {
       btnStyle: "bg-gray-100 text-gray-400 cursor-not-allowed",
       btnLabel: "Belum Diumumkan",
       link: null,
-      info: "Pengumuman akan dibuka setelah seluruh tahap seleksi selesai. Pantengin terus halaman ini — jangan sampai ketinggalan!",
+      info: "Pengumuman akan tersedia setelah seluruh tahapan seleksi selesai dilaksanakan.",
       borderStyle: "border-gray-200/60",
       hoverShadow: "hover:border-gray-300/80 hover:shadow-xl hover:shadow-gray-400/5",
     },
@@ -35,7 +56,8 @@ export default function AnnouncementOprec() {
       badgeStyle: "border-[#F27405]/30 text-[#F27405]",
       btnStyle: "bg-gradient-to-r from-[#F27405] to-[#A6691F] text-white shadow-lg shadow-[#F27405]/20 hover:scale-105 active:scale-95",
       btnLabel: "Lihat Pengumuman",
-      link: "https://bit.ly/pengumuman-oprec-riset",
+      // Menggunakan link dinamis dari Sanity, fallback ke link asal jika kosong
+      link: externalLink || "https://bit.ly/pengumuman-oprec-riset",
       info: "Pengumuman sudah tersedia! Klik tombol di bawah untuk melihat daftar calon anggota baru yang diterima.",
       borderStyle: "border-[#F27405]/10",
       hoverShadow: "hover:border-[#F27405]/30 hover:shadow-xl hover:shadow-[#F27405]/12",
@@ -52,7 +74,7 @@ export default function AnnouncementOprec() {
     },
   };
 
-  const config = statusConfig[status];
+  const config = statusConfig[currentStatus];
 
   return (
     <section className="py-24 px-4 bg-[#F2F2F2]">
@@ -69,7 +91,7 @@ export default function AnnouncementOprec() {
           
           {/* Badge Status Minimalis (Outline-Only) */}
           <span className={`inline-flex items-center gap-2 text-xs font-extrabold border bg-transparent px-4 py-1.5 rounded-full mb-8 uppercase tracking-widest ${config.badgeStyle}`}>
-            <span className={`h-2 w-2 rounded-full ${status === "open" ? "bg-[#F27405] animate-pulse" : "bg-gray-400"}`}></span>
+            <span className={`h-2 w-2 rounded-full ${currentStatus === "open" ? "bg-[#F27405] animate-pulse" : "bg-gray-400"}`}></span>
             {config.badge}
           </span>
 
@@ -100,7 +122,7 @@ export default function AnnouncementOprec() {
         </div>
 
         <p className="mt-8 text-xs text-gray-500 font-bold uppercase tracking-wider">
-          Untuk pertanyaan lebih lanjut, silakan hubungi narahubung resmi kami.
+          Untuk informasi lebih lanjut, silakan menghubungi narahubung yang tersedia.
         </p>
       </div>
     </section>

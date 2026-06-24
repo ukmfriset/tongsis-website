@@ -1,14 +1,44 @@
 "use client";
 
+import { useState, useEffect } from "react";
+import { client } from "../../src/sanity/client"; // Jalur relatif andalanmu
+
+interface DresscodeItem {
+  day: string;
+  status: string;
+  deskripsi: string;
+  warna: "orange" | "brown";
+}
+
+// Data default bawaan asli kamu (Sistem Fallback)
+const defaultDays: DresscodeItem[] = [
+  { day: "Day 1", status: "Coming Soon", deskripsi: "Akan diumumkan setelah pendaftaran ditutup", warna: "orange" },
+  { day: "Day 2", status: "Coming Soon", deskripsi: "Akan diumumkan setelah pendaftaran ditutup", warna: "brown" },
+  { day: "Day 3", status: "Coming Soon", deskripsi: "Akan diumumkan setelah pendaftaran ditutup", warna: "orange" },
+];
+
 export default function DresscodeDiklat() {
-  const days = [
-    { day: "Day 1", status: "Coming Soon", warna: "orange" },
-    { day: "Day 2", status: "Coming Soon", warna: "brown" },
-    { day: "Day 3", status: "Coming Soon", warna: "orange" },
-  ];
+  const [days, setDays] = useState<DresscodeItem[]>(defaultDays);
+
+  // Mengambil informasi aturan pakaian dari Sanity
+  useEffect(() => {
+    async function fetchDresscode() {
+      try {
+        // Mengurutkan berdasarkan abjad/nama hari (Day 1, Day 2, dst)
+        const query = `*[_type == "dresscodediklat"] | order(day asc){ day, status, deskripsi, warna }`;
+        const data = await client.fetch(query);
+        
+        if (data && data.length > 0) {
+          setDays(data);
+        }
+      } catch (error) {
+        console.error("Gagal memuat data dresscode dari Sanity:", error);
+      }
+    }
+    fetchDresscode();
+  }, []);
 
   return (
-    /* PERBAIKAN: Mengubah bg-white menjadi bg-[#F2F2F2] agar serasi dengan alur halaman */
     <section className="py-24 px-4 bg-[#F2F2F2]">
       <div className="mx-auto max-w-5xl">
 
@@ -21,7 +51,7 @@ export default function DresscodeDiklat() {
             Dresscode TONGSIS
           </h2>
           <p className="mt-6 text-gray-600 max-w-2xl mx-auto text-lg leading-relaxed font-medium">
-            Dresscode akan diumumkan setelah pendaftaran ditutup. Pantengin halaman ini ya!
+            Informasi mengenai dresscode akan diumumkan setelah masa pendaftaran berakhir.
           </p>
         </div>
 
@@ -65,7 +95,7 @@ export default function DresscodeDiklat() {
                 </span>
 
                 <p className="text-sm text-gray-400 mt-2 font-medium relative z-10">
-                  Akan diumumkan setelah pendaftaran ditutup
+                  {item.deskripsi}
                 </p>
               </div>
             );

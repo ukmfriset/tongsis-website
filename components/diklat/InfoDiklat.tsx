@@ -1,41 +1,71 @@
 "use client";
 
+import { useState, useEffect } from "react";
+import { client } from "../../src/sanity/client"; // Jalur relatif andalanmu
+
+interface InfoItem {
+  icon: string;
+  judul: string;
+  warna: "orange" | "brown";
+  items: string[];
+}
+
+// Data default bawaan asli kamu (Sistem Fallback)
+const defaultInfo: InfoItem[] = [
+  {
+    icon: "💰",
+    judul: "Pembayaran",
+    warna: "orange",
+    items: [
+      "Biaya pendaftaran: Rp XX.XXX",
+      "Pembayaran melalui rekening panitia",
+      "Konfirmasi via WhatsApp",
+      "Batas bayar: Akan Diumumkan",
+    ],
+  },
+  {
+    icon: "🕐",
+    judul: "Waktu",
+    warna: "brown",
+    items: [
+      "Pra Diklat: Akan Diumumkan",
+      "Diklat Utama: Akan Diumumkan",
+      "Pelantikan: Akan Diumumkan",
+      "Durasi: 3 hari 2 malam",
+    ],
+  },
+  {
+    icon: "📍",
+    judul: "Tempat",
+    warna: "orange",
+    items: [
+      "Lokasi: TBA (akan diumumkan)",
+      "Area: Sekitar Bangkalan, Madura",
+      "Transportasi: Mandiri",
+      "Update info via panitia",
+    ],
+  },
+];
+
 export default function InfoDiklat() {
-  const info = [
-    {
-      icon: "💰",
-      judul: "Pembayaran",
-      warna: "orange",
-      items: [
-        "Biaya pendaftaran: Rp XX.XXX",
-        "Pembayaran melalui rekening panitia",
-        "Konfirmasi via WhatsApp",
-        "Batas bayar: Akan Diumumkan", // Diubah menjadi 'Akan Diumumkan' agar sinkron dengan Timeline
-      ],
-    },
-    {
-      icon: "🕐",
-      judul: "Waktu",
-      warna: "brown",
-      items: [
-        "Pra Diklat: Akan Diumumkan", // Diubah menjadi 'Akan Diumumkan' agar sinkron dengan Timeline
-        "Diklat Utama: Akan Diumumkan", // Diubah menjadi 'Akan Diumumkan' agar sinkron dengan Timeline
-        "Pelantikan: Akan Diumumkan", // Diubah menjadi 'Akan Diumumkan' agar sinkron dengan Timeline
-        "Durasi: 3 hari 2 malam",
-      ],
-    },
-    {
-      icon: "📍",
-      judul: "Tempat",
-      warna: "orange",
-      items: [
-        "Lokasi: TBA (akan diumumkan)",
-        "Area: Sekitar Bangkalan, Madura",
-        "Transportasi: Mandiri",
-        "Update info via panitia",
-      ],
-    },
-  ];
+  const [info, setInfo] = useState<InfoItem[]>(defaultInfo);
+
+  // Ambil rincian info pelaksanaan dari Sanity secara real-time
+  useEffect(() => {
+    async function fetchInfoDiklat() {
+      try {
+        const query = `*[_type == "infodiklat"]{ icon, judul, warna, items }`;
+        const data = await client.fetch(query);
+        
+        if (data && data.length > 0) {
+          setInfo(data);
+        }
+      } catch (error) {
+        console.error("Gagal memuat data informasi pelaksanaan dari Sanity:", error);
+      }
+    }
+    fetchInfoDiklat();
+  }, []);
 
   return (
     <section className="py-24 px-4 bg-[#F2F2F2]">
@@ -47,10 +77,10 @@ export default function InfoDiklat() {
             Info Penting
           </span>
           <h2 className="mt-4 text-4xl md:text-5xl font-extrabold text-[#0D0D0D] tracking-tight">
-            Pembayaran, Waktu & Tempat
+            Informasi Pelaksanaan
           </h2>
           <p className="mt-6 text-gray-600 max-w-2xl mx-auto text-lg leading-relaxed font-medium">
-            Persiapkan dirimu dengan baik. Berikut informasi pelaksanaan TONGSIS yang perlu kamu ketahui.
+            Pembayaran, Waktu, dan Lokasi
           </p>
         </div>
 
@@ -73,7 +103,6 @@ export default function InfoDiklat() {
 
                 {/* Header Kartu: Ikon & Judul */}
                 <div className="relative z-10 flex items-center gap-4 mb-8">
-                  {/* Wadah Ikon Minimalis Outline-Only */}
                   <div className={`w-12 h-12 rounded-2xl border-2 bg-transparent flex items-center justify-center text-2xl transition-all duration-300
                     ${isOrange 
                       ? "border-[#F27405]/20 text-[#F27405] group-hover:border-[#F27405] group-hover:bg-[#F27405]/5" 
@@ -87,9 +116,8 @@ export default function InfoDiklat() {
                 
                 {/* Daftar Item Info */}
                 <div className="relative z-10 flex flex-col gap-4">
-                  {item.items.map((text, i) => (
+                  {item.items && item.items.map((text, i) => (
                     <div key={i} className="flex items-start gap-3">
-                      {/* Peluru Poin (Bullet Point) Berwarna */}
                       <span className={`mt-1.5 text-[10px] transition-colors duration-300
                         ${isOrange ? "text-[#F27405]" : "text-[#A6691F]"}`}
                       >
