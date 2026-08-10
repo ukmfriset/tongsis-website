@@ -1,0 +1,174 @@
+"use client";
+
+import { useState, useEffect, useRef } from "react";
+import { client } from "../../src/sanity/client"; // Jalur relatif akurat andalanmu
+
+// Interface tipe data untuk TypeScript yang disesuaikan
+interface AchievementItem {
+  name: string;
+  info: string;
+  title: string;
+  badge: string;
+}
+
+// Data default bawaan baru sesuai permintaan Anda (Sistem Fallback)
+const defaultAchievements: AchievementItem[] = [
+  { badge: "🌍 Internasional", title: "Google Student Ambassador 2026", name: "Lia Nur Khasanah", info: "UKM-F Riset FISIB UTM" },
+  { badge: "🏅 Nasional", title: "Juara Harapan 1 Festival KOMPAS 2025", name: "Lia Nur Khasanah", info: "UKM-F Riset FISIB UTM" },
+  { badge: "🥉 Nasional", title: "Bronze Medal at NESCO 2 Malang 2026", name: "Isni Hosiyah Robbi", info: "UKM-F Riset FISIB UTM" },
+  { badge: "🥉 Nasional", title: "Bronze Medal at IGNITE FUTURE FEST National Essay 2026", name: "Sofiatun Kholifah", info: "UKM-F Riset FISIB UTM" },
+  { badge: "🎓 Kampus", title: "Juara 2 Mawapres Kategori Pratama FISIB", name: "Lucky Tri Kusuma", info: "UKM-F Riset FISIB UTM" },
+  { badge: "🎓 Kampus", title: "Juara 3 Mawapres Kategori Utama FISIB", name: "Rangga Prashagi", info: "UKM-F Riset FISIB UTM" },
+  { badge: "🎓 Kampus", title: "Juara Harapan 1 Mawapres Kategori Utama FISIB", name: "Muhammad", info: "UKM-F Riset FISIB UTM" },
+  { badge: "🌍 Internasional", title: "Juara 1 Lomba Poster Tingkat Internasional (Gold Medal) - Olimpiade Bimbingan dan Konseling XII 2026", name: "Fitri Sugi Ayuni", info: "UKM-F Riset FISIB UTM" },
+  { badge: "🌍 Internasional", title: "Juara 2 Lomba Essai Tingkat Internasional (Silver Medal) - Olimpiade Bimbingan dan Konseling XII 2026", name: "Fitri Sugi Ayuni", info: "UKM-F Riset FISIB UTM" },
+  { badge: "🎓 Kampus", title: "Best Personality - Duta Kampus Putra Potre UTM 2026", name: "Thoyyibatul Insani", info: "UKM-F Riset FISIB UTM" },
+  { badge: "🏆 Nasional", title: "1st Kejuaraan Nasional Cheerleading Team Premier All Star Jawa Timur", name: "Ibra Kusuma Dandi", info: "UKM-F Riset FISIB UTM" },
+  { badge: "🏆 Nasional", title: "Lolos Pendanaan Simbelmawa 2026", name: "Margaretha Diah A.T & Rangga Prashagi", info: "UKM-F Riset FISIB UTM" }
+];
+
+export default function AchievementsOprac() {
+  const [achievements, setAchievements] = useState<AchievementItem[]>(defaultAchievements);
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  // Ambil data prestasi dari Sanity
+  useEffect(() => {
+    async function fetchAchievements() {
+      try {
+        const query = `*[_type == "achievement"] | order(_createdAt desc) {
+          name,
+          info,
+          title,
+          badge
+        }`;
+        const data = await client.fetch(query);
+        
+        if (data && data.length > 0) {
+          setAchievements(data);
+        }
+      } catch (error) {
+        console.error("Gagal mengambil data prestasi dari Sanity:", error);
+      }
+    }
+    fetchAchievements();
+  }, []);
+
+  // Helper untuk mendapatkan ikon berdasarkan kata kunci di badge
+  const getBadgeIcon = (badgeText: string) => {
+    if (badgeText.includes("Internasional") || badgeText.includes("🌍")) return "🌍";
+    if (badgeText.includes("Kampus") || badgeText.includes("🎓")) return "🎓";
+    if (badgeText.includes("Nasional") || badgeText.includes("🏅") || badgeText.includes("🥉") || badgeText.includes("🏆")) return "🏆";
+    return "⭐";
+  };
+
+  // Fungsi untuk menggeser carousel ke kiri/kanan berdasarkan lebar container
+  const scrollCarousel = (direction: "left" | "right") => {
+    if (scrollRef.current) {
+      const { scrollLeft, clientWidth } = scrollRef.current;
+      const offset = direction === "left" ? -clientWidth : clientWidth;
+      scrollRef.current.scrollTo({ left: scrollLeft + offset, behavior: "smooth" });
+    }
+  };
+
+  return (
+    <section className="py-24 px-4 bg-[#F2F2F2]">
+      <div className="mx-auto max-w-6xl">
+        {/* Section Header */}
+        <div className="text-center mb-16">
+          <span className="text-xs font-bold tracking-[0.2em] text-[#F27405] uppercase">
+            Bukti Nyata
+          </span>
+          <h2 className="mt-4 text-4xl md:text-5xl font-extrabold text-[#0D0D0D] tracking-tight">
+            Bukan Sekadar Rencana, Ini Hasilnya
+          </h2>
+          <p className="mt-6 text-gray-600 max-w-2xl mx-auto text-lg leading-relaxed font-medium">
+            Anggota UKM-F Riset telah menghasilkan berbagai karya dan pencapaian di tingkat regional hingga internasional.
+          </p>
+        </div>
+
+        {/* Carousel Container */}
+        <div className="relative px-2 md:px-10 mb-12">
+          {/* Tombol Navigasi Kiri */}
+          <button
+            onClick={() => scrollCarousel("left")}
+            className="absolute left-0 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full bg-white shadow-lg border border-gray-100 flex items-center justify-center text-[#0D0D0D] hover:bg-[#F27405] hover:text-white transition-all duration-300 focus:outline-none"
+            aria-label="Geser ke Kiri"
+          >
+            ❮
+          </button>
+
+          {/* Tombol Navigasi Kanan */}
+          <button
+            onClick={() => scrollCarousel("right")}
+            className="absolute right-0 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full bg-white shadow-lg border border-gray-100 flex items-center justify-center text-[#0D0D0D] hover:bg-[#F27405] hover:text-white transition-all duration-300 focus:outline-none"
+            aria-label="Geser ke Kanan"
+          >
+            ❯
+          </button>
+
+          {/* Wrapper Grid 3x2 dengan Scroll Horizontal */}
+          <div
+            ref={scrollRef}
+            className="grid grid-flow-col grid-rows-2 gap-6 overflow-x-auto snap-x snap-mandatory pb-6 pt-2 px-4"
+            style={{ 
+              scrollbarWidth: "none", 
+              msOverflowStyle: "none",
+              gridAutoColumns: "calc((100% - 3rem) / 3)" 
+            }}
+          >
+            {achievements.map((item, index) => (
+              <div
+                key={index}
+                className="w-[85vw] sm:w-[350px] md:w-auto snap-start group relative overflow-hidden bg-white rounded-[2rem] p-8 border border-gray-100 transition-all duration-300 hover:-translate-y-2 hover:border-[#F27405]/30 hover:shadow-[0_20px_50px_-15px_rgba(242,116,5,0.12)] flex flex-col justify-between"
+              >
+                <div>
+                  {/* Overlay Transparan saat Hover */}
+                  <div className="absolute inset-0 opacity-0 group-hover:opacity-[0.015] transition-opacity duration-300 bg-[#F27405]"></div>
+
+                  {/* Icon & Level Badge */}
+                  <div className="relative z-10 flex items-center justify-between mb-6">
+                    {/* Wadah Icon Minimalis (Outline-Only) */}
+                    <div className="w-14 h-14 rounded-2xl flex items-center justify-center text-2xl border-2 bg-transparent border-[#F27405]/20 group-hover:border-[#F27405] group-hover:shadow-md group-hover:shadow-[#F27405]/10 transition-all duration-300">
+                      {getBadgeIcon(item.badge)}
+                    </div>
+
+                    {/* Badge Keterangan Level */}
+                    <span className="text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider bg-[#F27405]/10 text-[#F27405]">
+                      {item.badge}
+                    </span>
+                  </div>
+
+                  {/* Prestasi (Title) */}
+                  <h4 className="relative z-10 font-extrabold text-[#0D0D0D] text-lg leading-snug mb-6">
+                    {item.title}
+                  </h4>
+                </div>
+
+                {/* Profil (Name & Info) */}
+                <div className="relative z-10 pt-6 border-t border-gray-100 mt-auto">
+                  <p className="font-extrabold text-[#0D0D0D] text-sm">{item.name}</p>
+                  <p className="text-xs text-gray-500 font-medium mt-1">{item.info}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Tombol Lihat Prestasi Lainnya dengan Gradasi Tema Utama */}
+        <div className="text-center">
+          <a
+            href="https://ukmfriset.or.id/prestasi"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center justify-center px-8 py-4 rounded-full text-white font-bold text-sm tracking-wide transition-all duration-300 hover:opacity-95 hover:shadow-lg hover:shadow-[var(--accent-from)]/20 hover:-translate-y-0.5"
+            style={{
+              background: "linear-gradient(135deg, var(--accent-from), var(--accent-to))"
+            }}
+          >
+            Lihat Prestasi Lainnya →
+          </a>
+        </div>
+      </div>
+    </section>
+  );
+}
