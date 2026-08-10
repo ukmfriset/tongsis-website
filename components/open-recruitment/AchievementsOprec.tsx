@@ -106,7 +106,7 @@ export default function AchievementsOprac() {
             ❯
           </button>
 
-          {/* Wrapper Grid 3x2 dengan Scroll Horizontal */}
+          {/* Wrapper Grid dengan Scroll Horizontal */}
           <div
             ref={scrollRef}
             className="grid grid-flow-col grid-rows-2 gap-6 overflow-x-auto snap-x snap-mandatory pb-6 pt-2 px-4"
@@ -119,54 +119,24 @@ export default function AchievementsOprac() {
             {achievements.map((item, index) => (
               <div
                 key={index}
-                className="w-[85vw] sm:w-[350px] md:w-auto snap-start group relative overflow-hidden bg-white rounded-[2rem] p-8 border border-gray-100 transition-all duration-300 hover:-translate-y-2 hover:border-[#F27405]/30 hover:shadow-[0_20px_50px_-15px_rgba(242,116,5,0.12)] flex flex-col justify-between"
+                className="w-[85vw] sm:w-[350px] md:w-auto bg-white p-6 rounded-2xl shadow-md border border-gray-100 snap-start flex flex-col justify-between"
               >
                 <div>
-                  {/* Overlay Transparan saat Hover */}
-                  <div className="absolute inset-0 opacity-0 group-hover:opacity-[0.015] transition-opacity duration-300 bg-[#F27405]"></div>
-
-                  {/* Icon & Level Badge */}
-                  <div className="relative z-10 flex items-center justify-between mb-6">
-                    {/* Wadah Icon Minimalis (Outline-Only) */}
-                    <div className="w-14 h-14 rounded-2xl flex items-center justify-center text-2xl border-2 bg-transparent border-[#F27405]/20 group-hover:border-[#F27405] group-hover:shadow-md group-hover:shadow-[#F27405]/10 transition-all duration-300">
-                      {getBadgeIcon(item.badge)}
-                    </div>
-
-                    {/* Badge Keterangan Level */}
-                    <span className="text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider bg-[#F27405]/10 text-[#F27405]">
-                      {item.badge}
-                    </span>
-                  </div>
-
-                  {/* Prestasi (Title) */}
-                  <h4 className="relative z-10 font-extrabold text-[#0D0D0D] text-lg leading-snug mb-6">
+                  <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-orange-50 text-[#F27405]">
+                    <span>{getBadgeIcon(item.badge)}</span>
+                    {item.badge}
+                  </span>
+                  <h3 className="mt-4 font-bold text-gray-900 line-clamp-2 text-base">
                     {item.title}
-                  </h4>
+                  </h3>
                 </div>
-
-                {/* Profil (Name & Info) */}
-                <div className="relative z-10 pt-6 border-t border-gray-100 mt-auto">
-                  <p className="font-extrabold text-[#0D0D0D] text-sm">{item.name}</p>
-                  <p className="text-xs text-gray-500 font-medium mt-1">{item.info}</p>
+                <div className="mt-6 pt-4 border-t border-gray-100">
+                  <p className="font-bold text-sm text-gray-800">{item.name}</p>
+                  <p className="text-xs text-gray-500 mt-0.5">{item.info}</p>
                 </div>
               </div>
             ))}
           </div>
-        </div>
-
-        {/* Tombol Lihat Prestasi Lainnya dengan Gradasi Tema Utama */}
-        <div className="text-center">
-          <a
-            href="https://ukmfriset.or.id/prestasi"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center justify-center px-8 py-4 rounded-full text-white font-bold text-sm tracking-wide transition-all duration-300 hover:opacity-95 hover:shadow-lg hover:shadow-[var(--accent-from)]/20 hover:-translate-y-0.5"
-            style={{
-              background: "linear-gradient(135deg, var(--accent-from), var(--accent-to))"
-            }}
-          >
-            Lihat Prestasi Lainnya →
-          </a>
         </div>
       </div>
     </section>
