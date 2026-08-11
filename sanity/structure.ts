@@ -78,7 +78,7 @@ export const structure: StructureResolver = (S) =>
         .title('🎓 Konten Diklat TONGSIS')
         .child(
           S.list()
-            .title('Kelola Komponen Oprec')
+            .title('Kelola Komponen Diklat')
             .items([
               
               S.listItem()
@@ -97,12 +97,12 @@ export const structure: StructureResolver = (S) =>
                 .child(S.documentTypeList('gallerydiklat').title('Dokumentasi Kegiatan TONGSIS')),
 
               S.listItem()
-                .id('diklatInfoMenu-Unique')
+                .id('diklatInfoMenu-Unique') // Mengunci ID Unik agar infodiklat tidak eror lagi!
                 .title('📌 Informasi Pelaksanaan Diklat')
                 .child(S.documentTypeList('infodiklat').title('Informasi Pelaksanaan Diklat')),
 
               S.listItem()
-                .id('diklatDresscodeMenu-Unique')
+                .id('diklatDresscodeMenu-Unique') // Dresscode kamu aman terpasang di sini
                 .title('👕 Dresscode Kegiatan Diklat')
                 .child(S.documentTypeList('dresscodediklat').title('Dresscode Kegiatan Diklat')),
                 
@@ -121,6 +121,8 @@ export const structure: StructureResolver = (S) =>
                     .documentId('ctadiklat')
                     .title('Link Pendaftaran & CP Utama Diklat')
                 ),
+                
+              // 🟢 KALO NEXT MAU NAMBAH MENU DIKLAT BARU, TINGGAL COPAST DI BAWAH SINI, BRO!
             ])
         ),
     ])
