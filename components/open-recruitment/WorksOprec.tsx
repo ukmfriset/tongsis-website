@@ -4,10 +4,10 @@ import Link from "next/link";
 
 export default function WorksOprec() {
   const categories = [
-    { icon: "📰", warna: "orange", judul: "Artikel", deskripsi: "Tulisan yang membahas berbagai isu sosial dan akademik dengan sudut pandang mahasiswa.", href: "https://www.ukmfriset.or.id/category/artikel" },
-    { icon: "📖", warna: "brown", judul: "Cerpen", deskripsi: "Cerita yang lahir dari ide, pengalaman, dan cara pandang mahasiswa.", href: "https://www.ukmfriset.or.id/category/cerpen" },
-    { icon: "📝", warna: "orange", judul: "Essay", deskripsi: "Tulisan kritis yang menyampaikan gagasan, argumen, dan perspektif baru.", href: "https://www.ukmfriset.or.id/category/essay" },
-    { icon: "✒️", warna: "brown", judul: "Puisi", deskripsi: "ERuang untuk mengekspresikan ide dan perasaan melalui kata-kata.", href: "https://www.ukmfriset.or.id/category/puisi" },
+    { icon: "📰", warna: "orange", judul: "Artikel", deskripsi: "Tulisan yang membahas berbagai isu sosial dan akademik dengan sudut pandang mahasiswa." },
+    { icon: "📖", warna: "brown", judul: "Cerpen", deskripsi: "Cerita yang lahir dari ide, pengalaman, dan cara pandang mahasiswa." },
+    { icon: "📝", warna: "orange", judul: "Essay", deskripsi: "Tulisan kritis yang menyampaikan gagasan, argumen, dan perspektif baru." },
+    { icon: "✒️", warna: "brown", judul: "Puisi", deskripsi: "Ruang untuk mengekspresikan ide dan perasaan melalui kata-kata." },
   ];
 
   return (
@@ -29,14 +29,11 @@ export default function WorksOprec() {
         {/* Category Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 mb-12">
           {categories.map((item) => (
-            <Link
+            <div
               key={item.judul}
-              href={item.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`group relative overflow-hidden bg-white rounded-[2rem] p-8 border transition-all duration-300 hover:-translate-y-2 
-              ${item.warna === "orange" 
-                ? "border-gray-100 hover:border-[#F27405]/30 hover:shadow-[0_20px_50px_-15px_rgba(242,116,5,0.12)]" 
+              className={`group relative overflow-hidden bg-white rounded-[2rem] p-8 border transition-all duration-300 hover:-translate-y-2
+              ${item.warna === "orange"
+                ? "border-gray-100 hover:border-[#F27405]/30 hover:shadow-[0_20px_50px_-15px_rgba(242,116,5,0.12)]"
                 : "border-gray-100 hover:border-[#A6691F]/30 hover:shadow-[0_20px_50px_-15px_rgba(166,105,31,0.12)]"}`}
             >
               {/* Overlay Transparan saat Hover */}
@@ -44,8 +41,8 @@ export default function WorksOprec() {
 
               {/* Wadah Icon Minimalis (Outline-Only) */}
               <div className={`w-14 h-14 rounded-2xl flex items-center justify-center text-2xl border-2 bg-transparent transition-all duration-300 mb-6
-                ${item.warna === "orange" 
-                  ? "border-[#F27405]/20 group-hover:border-[#F27405] group-hover:shadow-md group-hover:shadow-[#F27405]/10" 
+                ${item.warna === "orange"
+                  ? "border-[#F27405]/20 group-hover:border-[#F27405] group-hover:shadow-md group-hover:shadow-[#F27405]/10"
                   : "border-[#A6691F]/20 group-hover:border-[#A6691F] group-hover:shadow-md group-hover:shadow-[#A6691F]/10"
                 }`}
               >
@@ -53,27 +50,20 @@ export default function WorksOprec() {
               </div>
 
               <h3 className="relative z-10 font-extrabold text-[#0D0D0D] text-lg mb-2">{item.judul}</h3>
-              <p className="relative z-10 text-sm text-gray-500 leading-relaxed mb-6 font-medium min-h-[4rem]">{item.deskripsi}</p>
-              
-              {/* Teks Tautan */}
-              <div className={`relative z-10 text-xs font-bold inline-flex items-center gap-1 transition-all group-hover:gap-2 ${
-                item.warna === "orange" ? "text-[#F27405]" : "text-[#A6691F]"
-              }`}>
-                Lihat karya <span>→</span>
-              </div>
-            </Link>
+              <p className="relative z-10 text-sm text-gray-500 leading-relaxed font-medium min-h-[4rem]">{item.deskripsi}</p>
+            </div>
           ))}
         </div>
 
         {/* CTA Button */}
         <div className="text-center">
           <Link
-            href="https://www.ukmfriset.or.id"
+            href="https://ukmfriset.or.id/karya"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#F27405] to-[#A6691F] px-8 py-4 text-sm font-extrabold text-white shadow-lg shadow-[#F27405]/20 transition-all hover:scale-105 hover:shadow-[#F27405]/30"
           >
-            Kunjungi Website UKM-F Riset <span>→</span>
+            Lihat Semua Karya <span>→</span>
           </Link>
         </div>
       </div>

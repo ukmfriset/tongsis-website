@@ -42,7 +42,7 @@ export default function AchievementsOprac() {
           badge
         }`;
         const data = await client.fetch(query);
-        
+
         if (data && data.length > 0) {
           setAchievements(data);
         }
@@ -87,11 +87,11 @@ export default function AchievementsOprac() {
         </div>
 
         {/* Carousel Container */}
-        <div className="relative px-2 md:px-10 mb-12">
+        <div className="relative px-2 md:px-10">
           {/* Tombol Navigasi Kiri */}
           <button
             onClick={() => scrollCarousel("left")}
-            className="absolute left-0 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full bg-white shadow-lg border border-gray-100 flex items-center justify-center text-[#0D0D0D] hover:bg-[#F27405] hover:text-white transition-all duration-300 focus:outline-none"
+            className="absolute left-0 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full bg-white shadow-lg border border-gray-100 hidden md:flex items-center justify-center text-[#0D0D0D] hover:bg-[#F27405] hover:text-white transition-all duration-300 focus:outline-none"
             aria-label="Geser ke Kiri"
           >
             ❮
@@ -100,7 +100,7 @@ export default function AchievementsOprac() {
           {/* Tombol Navigasi Kanan */}
           <button
             onClick={() => scrollCarousel("right")}
-            className="absolute right-0 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full bg-white shadow-lg border border-gray-100 flex items-center justify-center text-[#0D0D0D] hover:bg-[#F27405] hover:text-white transition-all duration-300 focus:outline-none"
+            className="absolute right-0 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full bg-white shadow-lg border border-gray-100 hidden md:flex items-center justify-center text-[#0D0D0D] hover:bg-[#F27405] hover:text-white transition-all duration-300 focus:outline-none"
             aria-label="Geser ke Kanan"
           >
             ❯
@@ -109,17 +109,16 @@ export default function AchievementsOprac() {
           {/* Wrapper Grid dengan Scroll Horizontal */}
           <div
             ref={scrollRef}
-            className="grid grid-flow-col grid-rows-2 gap-6 overflow-x-auto snap-x snap-mandatory pb-6 pt-2 px-4"
-            style={{ 
-              scrollbarWidth: "none", 
-              msOverflowStyle: "none",
-              gridAutoColumns: "calc((100% - 3rem) / 3)" 
+            className="grid grid-flow-col grid-rows-1 md:grid-rows-2 gap-4 md:gap-6 overflow-x-auto snap-x snap-mandatory pb-6 pt-2 px-4 auto-cols-[85%] sm:auto-cols-[350px] md:auto-cols-[calc((100%-3rem)/3)]"
+            style={{
+              scrollbarWidth: "none",
+              msOverflowStyle: "none"
             }}
           >
             {achievements.map((item, index) => (
               <div
                 key={index}
-                className="w-[85vw] sm:w-[350px] md:w-auto bg-white p-6 rounded-2xl shadow-md border border-gray-100 snap-start flex flex-col justify-between"
+                className="w-full h-full bg-white p-6 rounded-2xl shadow-md border border-gray-100 snap-start flex flex-col justify-between"
               >
                 <div>
                   <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-orange-50 text-[#F27405]">
@@ -137,6 +136,18 @@ export default function AchievementsOprac() {
               </div>
             ))}
           </div>
+        </div>
+
+        {/* Tombol Lihat Semua Karya */}
+        <div className="mt-10 flex justify-center">
+          <a
+            href="https://ukmfriset.or.id/prestasi"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center justify-center px-8 py-3.5 text-base font-bold text-white bg-[#F27405] rounded-full hover:bg-[#d96604] transition-colors duration-300 shadow-md hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-orange-200"
+          >
+            Lihat Semua Prestasi &rarr;
+          </a>
         </div>
       </div>
     </section>
